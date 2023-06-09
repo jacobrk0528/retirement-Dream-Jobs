@@ -1,0 +1,4 @@
+TODO:
+ - Handle form submission for Contact Page
+        - Email the respose to me using MailTrap
+
