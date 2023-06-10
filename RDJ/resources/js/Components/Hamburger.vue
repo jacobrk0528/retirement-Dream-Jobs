@@ -29,7 +29,7 @@
                 >Quiz
                 </DropdownLink>
                 <DropdownLink
-                    :href="'/update-profile'"
+                    :href="'/user/profile'"
                     class="border-b border-gray-200"
                 >Update Profile</DropdownLink>
                 <form @submit.prevent="logout">

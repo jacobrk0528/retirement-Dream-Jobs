@@ -55,7 +55,31 @@
                 </div>
             </div>
 
-            <!--  -->
+            <!-- Phone -->
+            <div class="col-span-6 sm:col-span-4">
+                <InputLabel for="Phone" value="Phone"/>
+                <TextInput
+                    id="Phone"
+                    v-model="form.phone"
+                    type="number"
+                    class="mt-1 block w-full"
+                    autocomplete="phone"
+                />
+                <InputError :message="form.errors.phone" class="mt-2" />
+            </div>
+
+            <!-- DOB -->
+            <div class="col-span-6 sm:col-span-4">
+                <InputLabel for="dob" value="dob"/>
+                <TextInput
+                    id="dob"
+                    v-model="form.dob"
+                    type="text"
+                    class="mt-1 block w-full"
+                    autocomplete="dob"
+                />
+                <InputError :message="form.errors.dob" class="mt-2" />
+            </div>
         </template>
 
         <template #actions>
@@ -78,7 +102,6 @@ import FormSection from '@/Components/FormSection.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 
 const props = defineProps({
@@ -89,60 +112,20 @@ const form = useForm({
     _method: 'PUT',
     name: props.user.name,
     email: props.user.email,
-    photo: null,
+    phone: props.user.phone,
+    dob: props.user.dob
 });
 
 const verificationLinkSent = ref(null);
-const photoPreview = ref(null);
-const photoInput = ref(null);
 
 const updateProfileInformation = () => {
-    if (photoInput.value) {
-        form.photo = photoInput.value.files[0];
-    }
-
     form.post(route('user-profile-information.update'), {
         errorBag: 'updateProfileInformation',
         preserveScroll: true,
-        onSuccess: () => clearPhotoFileInput(),
     });
 };
 
 const sendEmailVerification = () => {
     verificationLinkSent.value = true;
-};
-
-const selectNewPhoto = () => {
-    photoInput.value.click();
-};
-
-const updatePhotoPreview = () => {
-    const photo = photoInput.value.files[0];
-
-    if (! photo) return;
-
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-        photoPreview.value = e.target.result;
-    };
-
-    reader.readAsDataURL(photo);
-};
-
-const deletePhoto = () => {
-    router.delete(route('current-user-photo.destroy'), {
-        preserveScroll: true,
-        onSuccess: () => {
-            photoPreview.value = null;
-            clearPhotoFileInput();
-        },
-    });
-};
-
-const clearPhotoFileInput = () => {
-    if (photoInput.value?.value) {
-        photoInput.value.value = null;
-    }
 };
 </script>

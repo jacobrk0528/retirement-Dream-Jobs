@@ -40,10 +40,6 @@ Route::middleware([
     Route::get('/quiz')
         ->name('quiz')
         ->uses([QuizController::class, 'show']);
-
-    Route::get('/update-profile')
-        ->name('updateProfile')
-        ->uses([UserController::class, 'showUpdateProfile']);
 });
 
 // POST

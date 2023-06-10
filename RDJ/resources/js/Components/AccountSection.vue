@@ -18,7 +18,7 @@
 
                 <!-- Email -->
                 <div class="flex mt-auto">
-                    <h6 class="mr-2 mb-6">
+                    <h6 class="mr-2">
                         Email:
                     </h6>
                     <p>
@@ -27,7 +27,7 @@
                 </div>
 
                 <!-- PHONE -->
-                <div class="flex">
+                <div class="flex mt-1">
                     <h6 class="mr-2">
                         Phone:
                     </h6>
@@ -35,37 +35,21 @@
                         {{ phone }}
                     </p>
                 </div>
-            </div>
-            <!-- ADDRESS; DOB -->
-            <div class="flex flex-col">
-                <!-- Address -->
-                <div class="flex mt-auto">
-                    <h6 class="mr-2">
-                        Address:
-                    </h6>
-                    <div>
-                        <p>
-                            {{ address.street1 }}
-                        </p>
-                        <p v-if="address.city">
-                            {{ capitalizeFirstLetter(address.city) }}, {{ address.state.toUpperCase() }} {{ address.zip }}
-                        </p>
-                    </div>
-                </div>
+
                 <!-- DOB -->
-                <div class="flex">
+                <div class="flex mt-1">
                     <h6 class="mr-2">
                         DOB:
                     </h6>
-                    <p v-if="dob.month">
-                        {{ dob.month }} / {{ dob.day }} / {{ dob.year }}
+                    <p>
+                        {{ dob }}
                     </p>
                 </div>
             </div>
         </div>
         <div class="flex pt-6">
-            <SecondaryButton class="mr-4 w-36" @click="showEditProfile = true">Edit Profile</SecondaryButton>
-            <SecondaryButton class="w-36">Reset Password</SecondaryButton>
+            <SecondaryButton class="mr-4 w-36" @click="redirectToProfile">Edit Profile</SecondaryButton>
+            <SecondaryButton class="w-36" @click="redirectToPassword">Reset Password</SecondaryButton>
         </div>
     </div>
 
@@ -88,8 +72,7 @@
                 name: this.user.name,
                 email: this.user.email,
                 phone: this.formatPhone(),
-                address: this.getAddress(),
-                dob: this.getdob()
+                dob: this.user.dob
             }
         },
         props: {
@@ -107,28 +90,19 @@
             EditProfile
         },
         methods: {
-            getAddress() {
-                if (this.user && this.user.address) {
-                    return JSON.parse(this.user.address);
-                }
-                return {};
-            },
-            getdob() {
-                if (this.user && this.user.dob) {
-                    return JSON.parse(this.user.dob);
-                }
-                return {};
-            },
             formatPhone() {
+                console.log(this.user + " : " + this.user.dob)
                 if (this.user && this.user.phone) {
                     let phone = this.user.phone;
                     return `(${phone.substring(0, 3)}) ${phone.substring(3, 6)}-${phone.substring(6)}`;
                 }
                 return '';
             },
-            capitalizeFirstLetter(string) {
-                if (!string) return '';
-                return string.charAt(0).toUpperCase() + string.slice(1);
+            redirectToProfile() {
+                window.location = route('profile.show');
+            },
+            redirectToPassword() {
+                window.location = '/user/profile#Password';
             }
         }
     };
