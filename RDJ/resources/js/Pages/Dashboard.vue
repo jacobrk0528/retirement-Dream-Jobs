@@ -1,5 +1,5 @@
 <template>
-    <AppLayout :Auth="!!user">
+    <AppLayout :Auth="!!$page.props.auth.user">
         <AccountSection :user="user"/>
         <DashboardSection
             Label="Quiz"
