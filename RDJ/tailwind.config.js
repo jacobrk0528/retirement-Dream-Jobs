@@ -6,7 +6,14 @@ module.exports = {
       "./resources/**/*.vue",
     ],
     theme: {
-      extend: {},
-    },
+        extend: {
+          screens: {
+            'sm': {'max': '425px'}, // Phones
+            'md': {'max': '904px', 'min': '426px'}, // Tablets
+            'md2': {'max': '600px'}, // smaller devices and Down
+            'lg': {'min': '905px'}, // Laptops
+          },
+        },
+      },
     plugins: [],
   }

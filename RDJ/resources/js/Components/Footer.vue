@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-end items-center bg-teal-200 bg-opacity-70 h-24 w-screen">
+    <div class="flex justify-end sm:justify-center items-center bg-teal-200 bg-opacity-70 h-24 w-screen">
         <Link
             :href="route('home')"
             class="mr-6 hover:text-gray-500"
@@ -21,7 +21,7 @@
 
         <Link
             :href="route('contact')"
-            class="mr-6 hover:text-gray-500"
+            class="mr-6 sm:mr-0 hover:text-gray-500"
             >Contact
         </Link>
     </div>
