@@ -1,6 +1,6 @@
 <template>
     <AppLayout :Auth="!!user">
-      <form @submit.prevent="submitForm">
+      <form  @submit.prevent>
         <div class="flex justify-center items-center my-20">
             <!-- content -->
             <div class="form-width">
@@ -44,41 +44,60 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-        <!-- <input type="text" v-model="form.name" placeholder="Name">
-        <input type="email" v-model="form.email" placeholder="Email">
-
-        <button type="submit">Submit</button> -->
       </form>
+
+        <div v-if="success" class="fixed bottom-0 right-0 m-4 bg-teal-300 text-black p-4 rounded">
+            {{ successMessage }}
+        </div>
     </AppLayout>
   </template>
 
 <script setup>
-  import AppLayout from '../Layouts/AppLayout.vue';
-  import PrimaryButton from '../Components/PrimaryButton.vue';
+import { ref } from 'vue';
+import axios from 'axios';
+import AppLayout from '../Layouts/AppLayout.vue';
+import PrimaryButton from '../Components/PrimaryButton.vue';
 
 
-  defineProps({
+defineProps({
     user: Object
-    });
+});
 
-  const form = {
+const form = {
     name: '',
     email: '',
     message: '',
-  };
+};
 
-  const submitForm = () => {
-    // Handle form submission
-  };
+const success = ref(false);
+const successMessage = ref('Your message has been sent!');
+
+const submitForm = () => {
+  axios.post('/send-email', form)
+    .then(response => {
+        success.value = true;
+        form.name = '';
+        form.email = '';
+        form.message = '';
+        setTimeout(() => {
+            success.value = false;
+        }, 3000);
+    })
+    .catch(error => {
+        console.error(error);
+        if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        } else if (error.request) {
+            console.log(error.request);
+        } else {
+            console.log('Error', error.message);
+        }
+    });
+};
+
+
 </script>
 
 <style>
