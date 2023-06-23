@@ -1,5 +1,5 @@
 <template>
-    <div class="ml-3 relative">
+    <div class="ml-2 relative">
         <Dropdown align="right" width="48">
             <template #trigger>
                 <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full transition">

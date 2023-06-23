@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     public function show()
     {
-        return Inertia::render('Welcome', [
+        return Inertia::render('Home', [
             'isAuth' => Auth::check(),
         ]);
     }

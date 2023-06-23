@@ -8,8 +8,10 @@ module.exports = {
     theme: {
         extend: {
           screens: {
-            'sm': {'max': '889px'},  // Small screens, up to 889px
-            'lg': {'min': '890px'},  // Large screens, starting from 890px
+            'sm': {'max': '425px'}, // Phones
+            'md': {'max': '904px', 'min': '426px'}, // Tablets
+            'md2': {'max': '600px'}, // smaller devices and Down
+            'lg': {'min': '905px'}, // Laptops
           },
         },
       },

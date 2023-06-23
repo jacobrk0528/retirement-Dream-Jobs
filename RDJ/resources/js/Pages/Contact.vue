@@ -1,7 +1,7 @@
 <template>
-    <AppLayout :Auth="!!user">
+    <AppLayout :Auth="!!$page.props.auth.user">
       <form @submit.prevent="submitForm">
-        <div class="flex justify-center items-center my-20">
+        <div class="flex justify-center items-center my-20 mx-12 lg:mx-0 sm:mx-2">
             <!-- content -->
             <div class="form-width">
                 <!-- TITLE -->
@@ -44,15 +44,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
         <!-- <input type="text" v-model="form.name" placeholder="Name">
         <input type="email" v-model="form.email" placeholder="Email">
 

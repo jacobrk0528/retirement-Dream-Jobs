@@ -1,18 +1,24 @@
 <template>
-    <AppLayout :Auth="isAuth">
+    <AppLayout :Auth="!!$page.props.auth.user">
+        <!-- IMAGE -->
         <div class="h-auto">
             <img src="/images/Main2.png" alt="Main Logo" class="img1">
         </div>
+
+        <!-- OUR MISSION -->
         <TextSection title="Our Mission" class="pt-6">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec turpis non lacus cursus commodo. Fusce volutpat dapibus mauris,
             at interdum justo elementum vel. Praesent nec nulla at elit bibendum suscipit ac vel enim. Phasellus in ipsum id orci laoreet
             interdum nec et tortor. Sed consectetur neque sit amet urna consequat, eu sodales magna iaculis.
         </TextSection>
+
+        <!-- HOW WE WORK -->
         <TextSection title="How We Work" class="ml-auto">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec turpis non lacus cursus commodo. Fusce volutpat dapibus mauris,
             at interdum justo elementum vel. Praesent nec nulla at elit bibendum suscipit ac vel enim. Phasellus in ipsum id orci laoreet
             interdum nec et tortor. Sed consectetur neque sit amet urna consequat, eu sodales magna iaculis.
         </TextSection>
+
     </AppLayout>
 </template>
 
