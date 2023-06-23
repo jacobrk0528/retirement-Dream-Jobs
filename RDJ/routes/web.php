@@ -44,3 +44,6 @@ Route::middleware([
 
 // POST
 Route::post('/updateUser', [UserController::class, 'update'])->name('updateUser');
+
+Route::post('/send-email', [ContactController::class, 'sendEmail']);
+
