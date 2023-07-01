@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('role')->default('user');
             $table->string('phone')->nullable();
             $table->string('dob')->nullable();
             $table->string('email')->unique();
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('quiz_completed')->default(0);
             $table->json('quiz_results')->nullable();
+            $table->timestamp('quiz_completed_at')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();

@@ -27,7 +27,7 @@
                         {{ completedLabel }}
                     </div>
                     <div class="w-3/12 sm:w-full text-center">
-                        12/24/24
+                        {{ completionDate  }}
                     </div>
                     <div class="flex w-3/12 sm:w-full sm:pt-1 justify-center">
                         <SecondaryButton @click="takeQuiz" class="w-5/12 sm:h-4 button">{{ buttonLabel }}</SecondaryButton>
@@ -47,6 +47,7 @@ export default {
         return {
             buttonLabel: '',
             completedLabel: '',
+            completionDate: ''
         }
     },
     components: {
@@ -69,13 +70,16 @@ export default {
         async quizLabel(num) {
             try {
                 const response = await axios.get('/quiz-completed');
-                if (response.data == true) {
+                if (response.data.completed == true) {
+                    console.log(response.data.completed_at);
+                    this.completionDate = response.data.completed_at;
                     if (num == 1) {
                         return 'Update';
                     } else {
                         return 'Completed';
                     }
                 } else {
+                    this.completionDate = '-';
                     if (num == 1) {
                         return 'Take';
                     } else {

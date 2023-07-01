@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\QuizMail;
+use Psy\Formatter\Formatter;
+use Carbon\Carbon;
+
 
 class QuizController extends Controller
 {
@@ -86,7 +89,11 @@ class QuizController extends Controller
 
     public function isCompleted() {
         $user = Auth::user();
-        return !!$user->quiz_completed;
+        $completedData = [
+            "completed" => !!$user->quiz_completed,
+            'completed_at' => Carbon::parse($user->quiz_completed_at)->format('d/m/Y')
+        ];
+        return $completedData;
     }
 
     public function submitQuiz() {
@@ -94,6 +101,9 @@ class QuizController extends Controller
 
         // mark user as completed
         $user->quiz_completed = true;
+
+        // save timestamp
+        $user->quiz_completed_at = now();
         $user->save();
 
         // get user's quiz results
