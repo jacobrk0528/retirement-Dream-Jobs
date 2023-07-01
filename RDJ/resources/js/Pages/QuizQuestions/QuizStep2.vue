@@ -80,17 +80,16 @@ export default {
     },
     methods: {
         updateAnswer(answer) {
-            axios.post('/submit-quiz', {
+            axios.post('/update-quiz', {
                 answer: answer,
                 question: 2
             })
-                    .then(response => {
-                        console.log(response);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            console.log(answer);
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
         },
         getAnswer() {
             axios.get('/get-quiz-answer', {

@@ -10,11 +10,8 @@
             <div class="flex flex-col items-center">
                 <!-- Question -->
                 <div class="ml-4 mt-12">
-                    <h5 class="text-xl font-semibold" v-if="isCompleted">
-                        Would you like to take the quiz?
-                    </h5>
-                    <h5 class="text-xl font-semibold" v-else>
-                        Would you like to update your quiz?
+                    <h5 class="text-xl font-semibold">
+                        Would you like to {{ label }} the quiz?
                     </h5>
                 </div>
             </div>
@@ -34,21 +31,27 @@ import PrimaryButton from '../../Components/PrimaryButton.vue';
 export default {
     data() {
         return {
-            isCompleted: this.getIsCompleted()
+            label: ''
         }
     },
     components: {
         PrimaryButton
     },
+    async created() {
+        this.label = await this.getLabel();
+    },
     methods: {
-        getIsCompleted() {
-            axios.get('/quiz-completed')
-                .then(response => {
-                    console.log(response);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+        async getLabel() {
+            try {
+                const response = await axios.get('/quiz-completed');
+                if (response.data == true) {
+                    return 'update';
+                } else {
+                    return 'take';
+                }
+            } catch (error) {
+                console.log(error);
+            }
         }
     },
     mounted() {

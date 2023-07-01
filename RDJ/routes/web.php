@@ -49,8 +49,9 @@ Route::post('/updateUser', [UserController::class, 'update'])->name('updateUser'
 Route::post('/send-email', [ContactController::class, 'sendEmail']);
 
 // Quiz routes
-Route::post('/submit-quiz', [QuizController::class, 'update'])->name('submit-quiz');
 Route::post('/setup-quiz', [QuizController::class, 'setup'])->name('setup-quiz');
 Route::get('/get-quiz-answer', [QuizController::class, 'getAnswer'])->name('get-quiz-answer');
+Route::post('/submit-quiz', [QuizController::class, 'submitQuiz'])->name('submit-quiz');
+Route::post('/update-quiz', [QuizController::class, 'update'])->name('submit-quiz');
 Route::get('/quiz-completed', [QuizController::class, 'isCompleted'])->name('quiz-completed');
 

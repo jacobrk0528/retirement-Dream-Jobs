@@ -24,13 +24,13 @@
                         Placement
                     </div>
                     <div class="w-3/12 sm:w-full text-center">
-                        Incomplete
+                        {{ completedLabel }}
                     </div>
                     <div class="w-3/12 sm:w-full text-center">
                         12/24/24
                     </div>
                     <div class="flex w-3/12 sm:w-full sm:pt-1 justify-center">
-                        <SecondaryButton class="w-5/12 sm:h-4 button">Take</SecondaryButton>
+                        <SecondaryButton @click="takeQuiz" class="w-5/12 sm:h-4 button">{{ buttonLabel }}</SecondaryButton>
                     </div>
                 </div>
             </div>
@@ -39,18 +39,54 @@
 </template>
 
 <script>
+import axios from 'axios';
 import SecondaryButton from './SecondaryButton.vue';
 
 export default {
-    components: {
-    SecondaryButton
-},
-    props: {
-        Label: {
-        type: String,
-        required: true
+    data() {
+        return {
+            buttonLabel: '',
+            completedLabel: '',
         }
     },
+    components: {
+        SecondaryButton
+    },
+    props: {
+        Label: {
+            type: String,
+            required: true
+        }
+    },
+    async created() {
+        this.buttonLabel = await this.quizLabel(1);
+        this.completedLabel = await this.quizLabel(2);
+    },
+    methods: {
+        takeQuiz() {
+            window.location.href = '/quiz';
+        },
+        async quizLabel(num) {
+            try {
+                const response = await axios.get('/quiz-completed');
+                if (response.data == true) {
+                    if (num == 1) {
+                        return 'Update';
+                    } else {
+                        return 'Completed';
+                    }
+                } else {
+                    if (num == 1) {
+                        return 'Take';
+                    } else {
+                        return 'Incomplete';
+                    }
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
 }
 </script>
 

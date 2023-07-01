@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\QuizMail;
 
 class QuizController extends Controller
 {
@@ -24,24 +26,19 @@ class QuizController extends Controller
     public function setup() {
         $user = Auth::user();
 
-        // Retrieve existing JSON data
         $existingData = json_decode($user->quiz_results, true);
 
         if ($existingData == null){
-            // Add new key-value pairs
             $existingData['Question1Answer'] = '';
             $existingData['Question2Answer'] = '';
             $existingData['Question3Answer'] = '';
             $existingData['Question4Answer'] = '';
             $existingData['Question5Answer'] = '';
 
-            // Encode the updated array back into JSON
             $newData = json_encode($existingData);
 
-            // Assign the JSON string to the quiz_results property
             $user->quiz_results = $newData;
 
-            // Save changes to the database (assuming you have appropriate code for this)
             $user->save();
         }
     }
@@ -90,5 +87,24 @@ class QuizController extends Controller
     public function isCompleted() {
         $user = Auth::user();
         return !!$user->quiz_completed;
+    }
+
+    public function submitQuiz() {
+        $user = Auth::user();
+
+        // mark user as completed
+        $user->quiz_completed = true;
+        $user->save();
+
+        // get user's quiz results
+        $results = json_decode($user->quiz_results, true);
+        $userDetails = [
+            'name' => $user->name,
+            'email' => $user->email
+        ];
+
+        // send email to admin
+        Mail::to('example@email.com')
+            ->send(new QuizMail($results, $userDetails));
     }
 }

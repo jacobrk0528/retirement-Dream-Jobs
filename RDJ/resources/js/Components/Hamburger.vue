@@ -20,6 +20,10 @@
             <template #content>
                 <!-- Authentication -->
                 <DropdownLink
+                    :href="route('home')"
+                    class="border-b border-gray-200"
+                >Home</DropdownLink>
+                <DropdownLink
                     :href="route('dashboard')"
                     class="border-b border-gray-200"
                 >Dashboard

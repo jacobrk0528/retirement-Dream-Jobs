@@ -2,5 +2,6 @@ TODO:
  - Make admin login and page
         - make it so admin can view all quizes and results and contact people
  - Add real text to site
- - make quiz page
+ - Quiz Page:
+    - make it so you cant go to next question until you answer the one your on
 

@@ -80,7 +80,7 @@ export default {
     },
     methods: {
         updateAnswer(answer) {
-            axios.post('/submit-quiz', {
+            axios.post('/update-quiz', {
                 answer: answer,
                 question: 4
             })

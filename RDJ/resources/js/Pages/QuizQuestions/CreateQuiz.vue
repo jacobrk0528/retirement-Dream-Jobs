@@ -38,6 +38,7 @@
     <div v-if="step == maxSteps">
         <QuizSubmit
             @prev="prevStep"
+            @submit="submit"
         ></QuizSubmit>
     </div>
 </template>
@@ -73,7 +74,6 @@
         },
         methods: {
             nextStep() {
-
                 if (this.step < this.maxSteps) {
                     this.step++;
                 }
@@ -85,6 +85,16 @@
             },
             cancel() {
                 window.location.pathname = '/dashboard';
+            },
+            submit() {
+                axios.post('/submit-quiz')
+                    .then(response => {
+                        window.location.pathname = '/dashboard';
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        console.log(error.response.data);
+                    });
             }
         },
         mounted() {
