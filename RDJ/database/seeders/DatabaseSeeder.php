@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'Jacob@email.com',
             'email_verified_at' => Carbon::now(),
             'password' => bcrypt('password'),
+            'quiz_results' => json_encode([
+                'Question1Answer' => 'Answer1',
+                'Question2Answer' => 'Answer2'
+            ]),
         ]);
     }
 }

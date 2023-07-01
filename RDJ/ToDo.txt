@@ -1,6 +1,6 @@
 TODO:
- - Handle form submission for Contact Page
-        - Email the respose to me using MailTrap
  - Make admin login and page
         - make it so admin can view all quizes and results and contact people
+ - Add real text to site
+ - make quiz page
 

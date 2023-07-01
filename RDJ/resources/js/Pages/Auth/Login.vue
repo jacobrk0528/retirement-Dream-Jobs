@@ -3,7 +3,7 @@
         <Head title="Log in" />
 
         <div class="flex justify-center">
-            <AuthenticationCard class="w-full lg:w-4/6 md:mx-6">
+            <AuthenticationCard class="w-full lg:w-1/2 md:mx-6">
                 <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
                     {{ status }}
                 </div>
