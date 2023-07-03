@@ -49,8 +49,14 @@
                 </div>
             </div>
             <div class="flex pt-6 sm:justify-center">
-                <SecondaryButton class="mr-4 w-36" @click="redirectToProfile">Edit Profile</SecondaryButton>
-                <SecondaryButton class="w-36" @click="redirectToPassword">Reset Password</SecondaryButton>
+                <SecondaryButton
+                    class="mr-4 w-36"
+                    @click="redirectToProfile"
+                >Edit Profile</SecondaryButton>
+                <SecondaryButton
+                    class="w-36"
+                    @click="redirectToPassword"
+                >Reset Password</SecondaryButton>
             </div>
         </div>
     </div>
@@ -78,6 +84,10 @@
             user: {
                 type: Object,
                 required: true
+            },
+            visiting: {
+                type: Boolean,
+                default: false
             }
         },
         components: {

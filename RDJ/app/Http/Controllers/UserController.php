@@ -39,4 +39,24 @@ class UserController extends Controller
             "user" => $user,
         ]);
     }
+
+    public function showProfile(int $id) {
+        $user = User::find($id);
+
+        // AT SOME POINT MAKE AN ERROR MESSAGE FOR THIS
+        if (!$user) {
+            return redirect()->route('home');
+        }
+
+        if ($id != Auth::id()) {
+            $visiting = true;
+        } else {
+            $visiting = false;
+        }
+
+        return Inertia::render('Dashboard', [
+            "user" => $user,
+            "visitingProfile" => $visiting,
+        ]);
+    }
 }
