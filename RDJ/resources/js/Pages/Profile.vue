@@ -1,8 +1,17 @@
 <template>
     <AppLayout :Auth="!!$page.props.auth.user">
-        <AccountSection :user="user" :visiting="visiting"/>
+        <AccountSection
+            :user="user"
+            :visiting="visitingProfile"/>
         <DashboardSection
             Label="Quiz"
+            name="Placement"
+            :visiting="visitingProfile"
+        />
+        <DashboardSection
+            Label="Resume"
+            name="Resume"
+            :visiting="visitingProfile"
         />
     </AppLayout>
 </template>
@@ -15,7 +24,7 @@ import DashboardSection from '../Components/DashboardSection.vue';
 
 defineProps({
     user: Object,
-    visiting: Boolean,
+    visitingProfile: Boolean,
 });
 </script>
 

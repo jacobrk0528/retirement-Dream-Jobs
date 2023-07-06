@@ -11,44 +11,22 @@
             <!-- Question -->
             <div class="ml-4 mt-12">
                 <h5 class="text-xl font-semibold">
-                    Second Question
+                    Question {{ questionNumber }}
                 </h5>
             </div>
 
             <!-- Answers -->
             <div class="pt-4">
-                <form>
-                    <label>
+                <form class="flex flex-col">
+                    <label v-for="option in optionsList">
                         <input
                             type="radio"
                             name="option"
-                            :value= option1
-                            :checked = "question2Answer === option1"
-                            @change = "updateAnswer(option1)"
+                            :value=option
+                            :checked = "questionAnswer == option.trim()"
+                            @change = "updateAnswer(option)"
                         >
-                        Option 1
-                    </label>
-                    <br>
-                    <label>
-                        <input
-                            type="radio"
-                            name="option"
-                            :value= option2
-                            :checked = "question2Answer === option2"
-                            @change = "updateAnswer(option2)"
-                        >
-                        Option 2
-                    </label>
-                    <br>
-                    <label>
-                        <input
-                            type="radio"
-                            name="option"
-                            :value= option3
-                            :checked = "question2Answer === option3"
-                            @change = "updateAnswer(option3)"
-                        >
-                        Option 3
+                        {{ option }}
                     </label>
                 </form>
             </div>
@@ -57,14 +35,14 @@
         <!-- NAVIGATION BUTTONS -->
         <div class="flex justify-between m-12">
             <PrimaryButton @click="$emit('prev')">Previous</PrimaryButton>
-            <PrimaryButton @click="$emit('continue')">Next</PrimaryButton>
+            <PrimaryButton :disabled="isDisabled" @click="$emit('continue')">Next</PrimaryButton>
         </div>
         </div>
     </div>
 </template>
 
 <script>
-import PrimaryButton from '../../Components/PrimaryButton.vue';
+import PrimaryButton from './PrimaryButton.vue';
 
 export default {
     components: {
@@ -72,20 +50,33 @@ export default {
     },
     data() {
         return {
-            option1: 'option 1',
-            option2: 'option 2',
-            option3: 'option 3',
-            question2Answer: this.getAnswer()
+            questionAnswer: this.getAnswer(),
+            optionsList: this.options ? this.options.split(',') : ''
+        }
+    },
+    props: {
+        questionNumber: {
+            type: Number,
+            required: true
+        },
+        question: {
+            type: String,
+            required: true
+        },
+        options: {
+            type: String,
+            required: true
         }
     },
     methods: {
         updateAnswer(answer) {
+            console.log(answer)
             axios.post('/update-quiz', {
                 answer: answer,
-                question: 2
+                question: this.questionNumber
             })
             .then(response => {
-                console.log(response);
+                this.questionAnswer = answer;
             })
             .catch(error => {
                 console.log(error);
@@ -94,16 +85,24 @@ export default {
         getAnswer() {
             axios.get('/get-quiz-answer', {
                 params: {
-                    question: 2
+                    question: this.questionNumber
                 }
             })
             .then(response => {
-                console.log(response);
-                this.question2Answer = response.data;
+                this.questionAnswer = response.data;
             })
             .catch(error => {
                 console.log(error);
             });
+        }
+    },
+    computed: {
+        isDisabled() {
+            if (this.questionAnswer === '') {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

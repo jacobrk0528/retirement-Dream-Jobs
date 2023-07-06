@@ -8,9 +8,9 @@
 
         <div v-if="Auth">
             <Link
-                :href="route('dashboard')"
+                :href="route('profile.show')"
                 class="mr-6 hover:text-gray-500"
-                >Dashboard
+                >Profile
             </Link>
             <Link
                 :href="route('quiz')"

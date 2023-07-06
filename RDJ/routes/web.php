@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\resumeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,9 +35,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard')
-        ->name('dashboard')
-        ->uses([DashboardController::class, 'show']);
+    Route::get('/profile')
+        ->name('profile.show')
+        ->uses([UserController::class, 'show']);
 
     Route::get('/quiz')
         ->name('quiz')
@@ -45,7 +45,10 @@ Route::middleware([
 });
 
 Route::get('/admin')->name('admin')->uses([AdminController::class, 'show'])->middleware('admin');
-Route::get('userProfile/{id}', [UserController::class, 'showProfile'])->name('userProfile')->middleware('admin');
+Route::get('userProfile/{id}', [UserController::class, 'showOtherProfile'])->name('userProfile')->middleware('admin');
+
+// resume
+Route::post('file-upload', [resumeController::class, 'store'])->name('file.store');
 
 
 // ------------------ API Routes ------------------ //

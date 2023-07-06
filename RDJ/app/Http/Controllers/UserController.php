@@ -9,6 +9,7 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
+    // UPDATE USER PROFILE
     public function update(Request $request)
     {
         $userId = Auth::id();
@@ -22,16 +23,14 @@ class UserController extends Controller
             return $value !== null;
         });
 
-        // Retrieve the user from the database
         $user = User::find($userId);
 
         if ($user) {
-            // Update the user attributes with the filtered data
             $user->update($filteredData);
-            // $user->update(['name' => $filteredData['firstName'] . " " . $filteredData['lastName']]);
         }
     }
 
+    // SHOW USER PROFILE UPDATE PAGE
     public function showUpdateProfile() {
         $user = Auth::user();
 
@@ -40,7 +39,8 @@ class UserController extends Controller
         ]);
     }
 
-    public function showProfile(int $id) {
+    // SHOW OTHER USER PROFILE
+    public function showOtherProfile(int $id) {
         $user = User::find($id);
 
         // AT SOME POINT MAKE AN ERROR MESSAGE FOR THIS
@@ -54,9 +54,20 @@ class UserController extends Controller
             $visiting = false;
         }
 
-        return Inertia::render('Dashboard', [
+
+        return Inertia::render('Profile', [
             "user" => $user,
             "visitingProfile" => $visiting,
+        ]);
+    }
+
+    // SHOW USER PROFILE
+    public function show()
+    {
+        $user = Auth::user();
+
+        return Inertia::render('Profile', [
+            "user" => $user,
         ]);
     }
 }

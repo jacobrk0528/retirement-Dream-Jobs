@@ -1,23 +1,24 @@
 TODO:
  - Make admin login and page
-        - Add user profiles so that when an admin clicks on a name in the table it can take you
-          to their profile
         - make it so you can click on the email and takes you to a form to send an email directly
           to the person
 
  - Change Dashboard Section:
-    - make it a userProfile section and not a dashboard section
-    - move everything to user Controller
-    - rm dashboard Controller
-    - rm picutre stuff
-    - refactor the way it looks
+    - rm picutre stuff ---> idk if i want to do this????????
+    - refactor the way it looks --> I also dont want to know if i want to do this??????
     - add a spot to upload a resume under the quiz section
         - name = quiz; status = uploaded / not; completion date = uploaded date; action = upload / view / rm
 
  - Add ability to upload resumes
     - idfk how to do this but figure it out
 
- - Quiz Page:
-    - make it so you cant go to next question until you answer the one your on
-
  - Add real text to site
+
+ - Resume
+    - change text on dashboard card to refelct if one has been uploaded or not
+    - add a uploaded on date to the migration
+    - make it so that admins can download the pdf (resume)
+    - add text to upload section to make it clear that only pdfs can be uploaded
+    - handle errors for too big files and wrong file types
+
+BUGS:

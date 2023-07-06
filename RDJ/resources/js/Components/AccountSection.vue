@@ -4,8 +4,8 @@
         <div class="w-10/12 my-2">
             <div class="flex sm:flex-col sm:justify-center sm:items-center">
                 <!-- Profile IMG -->
-                <div class="h-auto w-36 img-container">
-                    <img src="images/profileImage.png">
+                <div class="flex flex-col justify-center h-auto w-36 img-container">
+                    <img class="" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
                 </div>
 
                 <!-- NAME; EMAIL; PHONE -->
@@ -52,10 +52,12 @@
                 <SecondaryButton
                     class="mr-4 w-36"
                     @click="redirectToProfile"
+                    :disabled="visiting"
                 >Edit Profile</SecondaryButton>
                 <SecondaryButton
                     class="w-36"
                     @click="redirectToPassword"
+                    :disabled="visiting"
                 >Reset Password</SecondaryButton>
             </div>
         </div>
@@ -64,7 +66,6 @@
 
 <script>
     import SecondaryButton from "./SecondaryButton.vue";
-    import EditProfile from "./EditProfile.vue";
 
     export default {
         data() {
@@ -87,12 +88,10 @@
             },
             visiting: {
                 type: Boolean,
-                default: false
             }
         },
         components: {
-            SecondaryButton,
-            EditProfile
+            SecondaryButton
         },
         methods: {
             formatPhone() {
@@ -103,11 +102,14 @@
                 return '';
             },
             redirectToProfile() {
-                window.location = route('profile.show');
+                window.location = '/user/profile';
             },
             redirectToPassword() {
                 window.location = '/user/profile#Password';
             }
+        },
+        mounted() {
+            console.log(this.visiting);
         }
     };
 </script>

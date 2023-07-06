@@ -11,14 +11,14 @@
         </a>
 
         <!-- HAMBURGER -->
-        <div v-if="Auth" class="ml-auto mr-6 sm:mr-2 self-center">
+        <div v-if="Auth" class="mx-6 sm:mr-2 self-center">
             <Hamburger />
         </div>
         <div v-else class="ml-auto mr-6 sm:mr-2 self-center">
             <LoginRegister/>
         </div>
     </div>
-  </template>
+</template>
 
 <script>
 import Logo from './Logo.vue';

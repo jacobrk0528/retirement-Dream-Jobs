@@ -1,4 +1,10 @@
 <template>
+    <div v-if="showResumeUpload" class="fixed top-0 left-0 w-full h-full">
+        <div class="flex items-center justify-center h-full">
+            <resumeUpload @toggle-resume="toggleResume" />
+        </div>
+    </div>
+
     <div class="flex justify-center my-12">
         <div class="w-10/12">
             <h3 class="text-2xl uppercase sm:text-center">{{ Label }}</h3>
@@ -21,7 +27,7 @@
                 <!-- DATA SECTION -->
                 <div class="flex bg-white justify-evenly items-center h-10 sm:block sm:h-auto sm:w-1/2">
                     <div class="w-3/12 sm:w-full text-center">
-                        Placement
+                        {{ name }}
                     </div>
                     <div class="w-3/12 sm:w-full text-center">
                         {{ completedLabel }}
@@ -30,7 +36,19 @@
                         {{ completionDate  }}
                     </div>
                     <div class="flex w-3/12 sm:w-full sm:pt-1 justify-center">
-                        <SecondaryButton @click="takeQuiz" class="w-5/12 sm:h-4 button">{{ buttonLabel }}</SecondaryButton>
+                        <SecondaryButton
+                            v-if="Label == 'Quiz'"
+                            @click="takeQuiz"
+                            class="w-5/12 sm:h-4 button"
+                            :disabled="visiting"
+                        >{{ buttonLabel }}</SecondaryButton>
+
+                        <SecondaryButton
+                            v-if="Label == 'Resume'"
+                            @click="toggleResume"
+                            class="w-5/12 sm:h-4 button"
+                            :disabled="visiting"
+                        >{{ buttonLabel }}</SecondaryButton>
                     </div>
                 </div>
             </div>
@@ -41,22 +59,34 @@
 <script>
 import axios from 'axios';
 import SecondaryButton from './SecondaryButton.vue';
+import PrimaryButton from './PrimaryButton.vue'
+import resumeUpload from '../Components/resumeUpload.vue';
 
 export default {
     data() {
         return {
             buttonLabel: '',
             completedLabel: '',
-            completionDate: ''
+            completionDate: '',
+            showResumeUpload: false
         }
     },
     components: {
-        SecondaryButton
+        SecondaryButton,
+        PrimaryButton,
+        resumeUpload
     },
     props: {
         Label: {
             type: String,
             required: true
+        },
+        name: {
+            type: String,
+            required: true
+        },
+        visiting: {
+            type: Boolean,
         }
     },
     async created() {
@@ -66,6 +96,9 @@ export default {
     methods: {
         takeQuiz() {
             window.location.href = '/quiz';
+        },
+        toggleResume() {
+            this.showResumeUpload = !this.showResumeUpload
         },
         async quizLabel(num) {
             try {

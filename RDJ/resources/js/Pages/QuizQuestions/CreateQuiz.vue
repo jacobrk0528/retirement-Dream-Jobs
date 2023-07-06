@@ -1,55 +1,67 @@
 <template>
     <div v-if="step == 0">
-        <QuizStep0
-        @cancel="cancel"
-        @continue="nextStep"
-    ></QuizStep0>
+        <QuizStep
+            questionNumber = 0
+            question = "Would you like to begin the quiz?"
+            @cancel="cancel"
+            @continue="nextStep"
+        ></QuizStep>
     </div>
     <div v-if="step == 1">
-        <QuizStep1
-        @prev="prevStep"
-        @continue="nextStep"
-    ></QuizStep1>
+        <QuizStep
+            questionNumber = 1
+            question = "First Question?"
+            options = "option 1, option 2, option 3"
+            @prev="prevStep"
+            @continue="nextStep"
+        ></QuizStep>
     </div>
     <div v-if="step == 2">
-        <QuizStep2
-        @continue="nextStep"
-        @prev="prevStep"
-    ></QuizStep2>
+        <QuizStep
+            questionNumber = 2
+            question = "Second Question?"
+            options = "option 1, option 2, option 3"
+            @prev="prevStep"
+            @continue="nextStep"
+        ></QuizStep>
     </div>
     <div v-if="step == 3">
-        <QuizStep3
-        @continue="nextStep"
-        @prev="prevStep"
-        ></QuizStep3>
+        <QuizStep
+            questionNumber = 3
+            question = "Third Question?"
+            options = "option 1, option 2, option 3"
+            @prev="prevStep"
+            @continue="nextStep"
+        ></QuizStep>
     </div>
     <div v-if="step == 4">
-        <QuizStep4
-        @continue="nextStep"
-        @prev="prevStep"
-        ></QuizStep4>
+        <QuizStep
+            questionNumber = 4
+            question = "Fourth Question?"
+            options = "option 1, option 2, option 3"
+            @prev="prevStep"
+            @continue="nextStep"
+        ></QuizStep>
     </div>
     <div v-if="step == 5">
-        <QuizStep5
-        @continue="nextStep"
-        @prev="prevStep"
-        ></QuizStep5>
+        <QuizStep
+            questionNumber = 5
+            question = "Fifth Question?"
+            options = "option 1, option 2, option 3"
+            @prev="prevStep"
+            @continue="nextStep"
+        ></QuizStep>
     </div>
     <div v-if="step == maxSteps">
         <QuizSubmit
-            @prev="prevStep"
-            @submit="submit"
+        @prev="prevStep"
+        @submit="submit"
         ></QuizSubmit>
     </div>
 </template>
 
 <script>
-    import QuizStep0 from './QuizStep0.vue';
-    import QuizStep1 from './QuizStep1.vue';
-    import QuizStep2 from './QuizStep2.vue';
-    import QuizStep3 from './QuizStep3.vue';
-    import QuizStep4 from './QuizStep4.vue';
-    import QuizStep5 from './QuizStep5.vue';
+    import QuizStep from '../../Components/QuizStep.vue'
     import QuizSubmit from './QuizSubmit.vue';
 
     export default {
@@ -64,14 +76,9 @@
             results: Object
         },
         components: {
-            QuizStep0,
-            QuizStep1,
-            QuizStep2,
-            QuizStep3,
-            QuizStep4,
-            QuizStep5,
-            QuizSubmit
-        },
+    QuizStep,
+    QuizSubmit
+},
         methods: {
             nextStep() {
                 if (this.step < this.maxSteps) {
@@ -84,12 +91,12 @@
                 }
             },
             cancel() {
-                window.location.pathname = '/dashboard';
+                window.location.pathname = '/profile';
             },
             submit() {
                 axios.post('/submit-quiz')
                     .then(response => {
-                        window.location.pathname = '/dashboard';
+                        window.location.pathname = '/profile';
                     })
                     .catch(error => {
                         console.log(error);

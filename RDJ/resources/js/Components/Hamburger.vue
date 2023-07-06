@@ -20,22 +20,23 @@
             <template #content>
                 <!-- Authentication -->
                 <DropdownLink
+                    :href="route('admin')"
+                    class="border-b border-gray-200"
+                    v-if="$page.props.auth.user.role === 'admin'"
+                >Admin</DropdownLink>
+                <DropdownLink
                     :href="route('home')"
                     class="border-b border-gray-200"
                 >Home</DropdownLink>
                 <DropdownLink
-                    :href="route('dashboard')"
+                    :href="route('profile.show')"
                     class="border-b border-gray-200"
-                >Dashboard
+                >Profile
                 </DropdownLink>
                 <DropdownLink :href="route('quiz')"
                     class="border-b border-gray-200"
                 >Quiz
                 </DropdownLink>
-                <DropdownLink
-                    :href="'/user/profile'"
-                    class="border-b border-gray-200"
-                >Update Profile</DropdownLink>
                 <form @submit.prevent="logout">
                     <DropdownLink as="button">
                         Log Out
