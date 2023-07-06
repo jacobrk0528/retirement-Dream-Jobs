@@ -54,7 +54,6 @@ class UserController extends Controller
             $visiting = false;
         }
 
-
         return Inertia::render('Profile', [
             "user" => $user,
             "visitingProfile" => $visiting,

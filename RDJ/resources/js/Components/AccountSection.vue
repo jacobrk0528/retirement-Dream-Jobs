@@ -4,8 +4,10 @@
         <div class="w-10/12 my-2">
             <div class="flex sm:flex-col sm:justify-center sm:items-center">
                 <!-- Profile IMG -->
-                <div class="flex flex-col justify-center h-auto w-36 img-container">
-                    <img class="" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
+                <div class="flex flex-col justify-center max-w-36">
+                    <div class="h-auto w-auto img-container">
+                        <img class="max-h-36 max-w-full" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
+                    </div>
                 </div>
 
                 <!-- NAME; EMAIL; PHONE -->

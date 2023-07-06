@@ -49,7 +49,8 @@ Route::get('userProfile/{id}', [UserController::class, 'showOtherProfile'])->nam
 
 // resume
 Route::post('file-upload', [resumeController::class, 'store'])->name('file.store');
-
+Route::get('file-download/{userId}', [resumeController::class, 'downloadResume'])->name('file.download')->middleware('admin');
+Route::get('/file-uploaded/{userId}', [resumeController::class, 'isUploaded'])->name('resume-uploaded');
 
 // ------------------ API Routes ------------------ //
 

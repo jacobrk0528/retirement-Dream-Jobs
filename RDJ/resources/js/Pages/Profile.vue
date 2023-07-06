@@ -4,11 +4,13 @@
             :user="user"
             :visiting="visitingProfile"/>
         <DashboardSection
+            :user="user"
             Label="Quiz"
             name="Placement"
             :visiting="visitingProfile"
         />
         <DashboardSection
+            :user="user"
             Label="Resume"
             name="Resume"
             :visiting="visitingProfile"

@@ -3,7 +3,7 @@
         <div class="bg-teal-200 bg-opacity-60 p-6 rounded-xl border-2 border-black">
             <form>
                 <div class="flex flex-col mb-3">
-                    <label class="mb-2" for="inputFile">File:</label>
+                    <label class="mb-2" for="inputFile">File (Must be .pdf):</label>
                     <input
                         type="file"
                         name="file"
@@ -12,8 +12,9 @@
                         @change="handleFileChange">
                 </div>
 
-                <div class="mb-3">
-                    <PrimaryButton @click="uploadFile">Upload</PrimaryButton>
+                <div class="flex justify-between mb-3">
+                    <PrimaryButton @click="this.$emit(toggle-resume)">Cancel</PrimaryButton>
+                    <PrimaryButton class="" @click="uploadFile">Upload</PrimaryButton>
                 </div>
             </form>
         </div>
@@ -48,7 +49,7 @@
                         this.$emit('toggle-resume');
                     })
                     .catch(error => {
-                        this.error = error.response.data.message;
+                        console.log(error.response.data.message);
                     });
             }
         }

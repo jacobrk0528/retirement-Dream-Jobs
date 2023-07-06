@@ -1,5 +1,5 @@
 <template>
-    <div v-if="showResumeUpload" class="fixed top-0 left-0 w-full h-full">
+    <div v-if="showResumeUpload" class="fixed top-0 left-0 w-full h-full bg-gray-300 bg-opacity-70">
         <div class="flex items-center justify-center h-full">
             <resumeUpload @toggle-resume="toggleResume" />
         </div>
@@ -30,7 +30,7 @@
                         {{ name }}
                     </div>
                     <div class="w-3/12 sm:w-full text-center">
-                        {{ completedLabel }}
+                        {{ statusLabel }}
                     </div>
                     <div class="w-3/12 sm:w-full text-center">
                         {{ completionDate  }}
@@ -42,13 +42,20 @@
                             class="w-5/12 sm:h-4 button"
                             :disabled="visiting"
                         >{{ buttonLabel }}</SecondaryButton>
-
-                        <SecondaryButton
-                            v-if="Label == 'Resume'"
+                        <div v-if="Label == 'Resume'" class="flex justify-center w-5/12">
+                            <SecondaryButton
+                            v-if="!visiting"
                             @click="toggleResume"
-                            class="w-5/12 sm:h-4 button"
-                            :disabled="visiting"
-                        >{{ buttonLabel }}</SecondaryButton>
+                            class=" sm:h-4 button"
+                            >Upload</SecondaryButton>
+
+                            <SecondaryButton
+                            v-else
+                            class="sm:h-4 button"
+                            :disabled="!hasResume"
+                            @click="downloadResume"
+                            >Download</SecondaryButton>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -66,9 +73,10 @@ export default {
     data() {
         return {
             buttonLabel: '',
-            completedLabel: '',
+            statusLabel: '',
             completionDate: '',
-            showResumeUpload: false
+            showResumeUpload: false,
+            hasResume: false,
         }
     },
     components: {
@@ -77,6 +85,10 @@ export default {
         resumeUpload
     },
     props: {
+        user: {
+            type: Object,
+            required: true
+        },
         Label: {
             type: String,
             required: true
@@ -91,7 +103,7 @@ export default {
     },
     async created() {
         this.buttonLabel = await this.quizLabel(1);
-        this.completedLabel = await this.quizLabel(2);
+        this.statusLabel = this.Label == "Resume" ? await this.resumeLabel() : await this.quizLabel(2);
     },
     methods: {
         takeQuiz() {
@@ -104,7 +116,6 @@ export default {
             try {
                 const response = await axios.get('/quiz-completed');
                 if (response.data.completed == true) {
-                    console.log(response.data.completed_at);
                     this.completionDate = response.data.completed_at;
                     if (num == 1) {
                         return 'Update';
@@ -122,6 +133,40 @@ export default {
             } catch (error) {
                 console.log(error);
             }
+        },
+        async resumeLabel() {
+            console.log(this.user.id);
+            try {
+                const response = await axios.get(`/file-uploaded/${this.user.id}`);
+                if (response.data.uploaded == true) {
+                    this.completionDate = response.data.uploaded_at;
+                    this.hasResume = true;
+                    return 'Uploaded';
+                } else {
+                    this.completionDate = '-';
+                    return 'Incomplete';
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        downloadResume() {
+            const userId = this.user.id;
+            axios.get(`file-download/${userId}`, {responseType: 'blob'})
+                .then(response => {
+                    const url = window.URL.createObjectURL(response.data);
+                    const link = document.createElement('a');
+                    const filename = `${this.user.name}_resume.pdf`;
+
+                    link.href = url;
+                    link.setAttribute('download', filename);
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                })
+                .catch(error => {
+                    console.log(error)
+                });
         }
     }
 }

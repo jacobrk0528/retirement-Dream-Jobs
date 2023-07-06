@@ -1,24 +1,14 @@
 TODO:
- - Make admin login and page
-        - make it so you can click on the email and takes you to a form to send an email directly
+ - ADMIN
+    - make it so you can click on the email and takes you to a form to send an email directly
           to the person
 
- - Change Dashboard Section:
-    - rm picutre stuff ---> idk if i want to do this????????
-    - refactor the way it looks --> I also dont want to know if i want to do this??????
-    - add a spot to upload a resume under the quiz section
-        - name = quiz; status = uploaded / not; completion date = uploaded date; action = upload / view / rm
-
- - Add ability to upload resumes
-    - idfk how to do this but figure it out
-
- - Add real text to site
+ - PROFILE:
+    -
 
  - Resume
-    - change text on dashboard card to refelct if one has been uploaded or not
-    - add a uploaded on date to the migration
-    - make it so that admins can download the pdf (resume)
-    - add text to upload section to make it clear that only pdfs can be uploaded
     - handle errors for too big files and wrong file types
 
+ - OTHER
+    - Add real text to site
 BUGS:

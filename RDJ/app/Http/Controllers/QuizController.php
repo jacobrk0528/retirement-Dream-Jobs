@@ -91,7 +91,7 @@ class QuizController extends Controller
         $user = Auth::user();
         $completedData = [
             "completed" => !!$user->quiz_completed,
-            'completed_at' => Carbon::parse($user->quiz_completed_at)->format('d/m/Y')
+            'completed_at' => Carbon::parse($user->quiz_completed_at)->format('d / m / Y')
         ];
         return $completedData;
     }
