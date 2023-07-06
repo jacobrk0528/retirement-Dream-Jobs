@@ -18,11 +18,21 @@ class AdminController extends Controller
     }
 
     public function sortRows(Request $request) {
-        $users = User::where('quiz_completed', 1)->orderBy($request->input('sort'), $request->input('direction'))->get();
+        $users = User::where('quiz_completed', 1)->where('name', 'LIKE', '%' . $request->input('search') . '%')->orderBy($request->input('sort'), $request->input('direction'))->get();
         $data = [
             'users' => $users,
             'sort' => $request->input('sort'),
-            'direction' => $request->input('direction')
+            'direction' => $request->input('direction'),
+            'search' => $request->input('search')
+        ];
+        return $data;
+    }
+
+    public function search(Request $request) {
+        $users = User::where('quiz_completed', 1)->where('name', 'LIKE', '%' . $request->input('search') . '%')->get();
+        $data = [
+            'users' => $users,
+            'search' => $request->input('search')
         ];
         return $data;
     }

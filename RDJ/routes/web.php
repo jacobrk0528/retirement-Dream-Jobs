@@ -69,3 +69,4 @@ Route::get('/quiz-completed', [QuizController::class, 'isCompleted'])->name('qui
 
 // Admin routes
 Route::get('/sortQuizTableRows', [AdminController::class, 'sortRows'])->name('sortQuizTableRows');
+Route::get('/searchQuizTableRows', [AdminController::class, 'search'])->name('searchQuizTableRows');

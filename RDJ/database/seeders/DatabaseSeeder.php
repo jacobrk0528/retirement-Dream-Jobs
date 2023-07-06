@@ -67,5 +67,7 @@ class DatabaseSeeder extends Seeder
                 'Question5Answer' => 'Answer1',
             ]),
         ]);
+
+        User::factory()->count(100)->create();
     }
 }

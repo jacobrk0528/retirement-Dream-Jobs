@@ -1,90 +1,103 @@
 <template>
-    <div class="flex justify-center">
-        <ul class="flex flex-col my-10 mx-6 border-2 border-black bg-teal-100 w-full lg:w-3/4">
-            <li>
-                <div class="flex">
-                    <!-- ID -->
-                    <div
-                        :class="{'w-1/6 pl-4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800 text-blue-600' : currentSort === 'id',
-                                'w-1/6 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800' : currentSort !== 'id'}"
-                        @click="sortItems('id')"
-                    >
-                        <p>ID</p>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            v-if="currentSort == 'id'"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            :class="{'w-4 h-4 ml-1 inline-block align-middle transform rotate-180 text-blue-600' : currentSortDir === 'asc',
-                                    'w-4 h-4 ml-1 inline-block align-middle text-blue-600' : currentSortDir === 'desc'
-                                    }"
-                        >
-                            <path d="M6 9l6 6 6-6" />
-                        </svg>
-                    </div>
+    <div class="">
+        <!-- SEARCH -->
+        <div class="flex items-center w-full justify-center mt-12">
+            <input v-model="searchText" type="text" placeholder="Search..." class="px-4 py-2 mr-2 text-gray-700 rounded-lg focus:outline-none focus:ring focus:border-blue-300">
+            <PrimaryButton @click="search()">Search</PrimaryButton>
+        </div>
 
-                    <!-- NAME -->
-                    <div
-                        :class="{'w-1/4 pl-4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800 text-blue-600' : currentSort === 'name',
-                                'w-1/4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800' : currentSort !== 'name'}"
-                        @click="sortItems('name')"
-                    >
-                        <p>Name</p>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            v-if="currentSort == 'name'"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            :class="{'w-4 h-4 ml-1 inline-block align-middle transform rotate-180 text-blue-600' : currentSortDir === 'asc',
-                                    'w-4 h-4 ml-1 inline-block align-middle text-blue-600' : currentSortDir === 'desc'
-                                    }"
+        <!-- QUIZ TABLE -->
+        <div class="flex justify-center">
+            <ul class="flex flex-col my-10 mx-6 border-2 border-black bg-teal-100 w-full lg:w-3/4">
+                <li>
+                    <div class="flex justify-between">
+                        <!-- ID -->
+                        <div
+                            :class="{'w-1/12 pl-4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800 text-blue-600' : currentSort === 'id',
+                                    'w-1/12 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800' : currentSort !== 'id'}"
+                            @click="sortItems('id')"
                         >
-                            <path d="M6 9l6 6 6-6" />
-                        </svg>
-                    </div>
+                            <p>ID</p>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                v-if="currentSort == 'id'"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                :class="{'w-4 h-4 ml-1 inline-block align-middle transform rotate-180 text-blue-600' : currentSortDir === 'asc',
+                                        'w-4 h-4 ml-1 inline-block align-middle text-blue-600' : currentSortDir === 'desc'
+                                        }"
+                            >
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </div>
 
-                    <!-- EMAIL -->
-                    <div
-                        :class="{'w-1/4 pl-4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800 text-blue-600' : currentSort === 'email',
-                                'w-1/4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800' : currentSort !== 'email'}"
-                        @click="sortItems('email')"
-                    >
-                        <p>Email</p>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            v-if="currentSort == 'email'"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            :class="{'w-4 h-4 ml-1 inline-block align-middle transform rotate-180 text-blue-600' : currentSortDir === 'asc',
-                                    'w-4 h-4 ml-1 inline-block align-middle text-blue-600' : currentSortDir === 'desc'
-                                    }"
+                        <!-- NAME -->
+                        <div
+                            :class="{'w-1/5 pl-4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800 text-blue-600' : currentSort === 'name',
+                                    'w-1/5 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800' : currentSort !== 'name'}"
+                            @click="sortItems('name')"
                         >
-                            <path d="M6 9l6 6 6-6" />
-                        </svg>
-                    </div>
+                            <p>Name</p>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                v-if="currentSort == 'name'"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                :class="{'w-4 h-4 ml-1 inline-block align-middle transform rotate-180 text-blue-600' : currentSortDir === 'asc',
+                                        'w-4 h-4 ml-1 inline-block align-middle text-blue-600' : currentSortDir === 'desc'
+                                        }"
+                            >
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </div>
 
-                    <!-- RESPONSES -->
-                    <div
-                        class="w-1/2 text-center text-2xl font-semibold">Responses</div>
+                        <!-- EMAIL -->
+                        <div
+                            :class="{'w-1/3 pl-4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800 text-blue-600' : currentSort === 'email',
+                                    'w-1/3 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800' : currentSort !== 'email'}"
+                            @click="sortItems('email')"
+                        >
+                            <p>Email</p>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                v-if="currentSort == 'email'"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                :class="{'w-4 h-4 ml-1 inline-block align-middle transform rotate-180 text-blue-600' : currentSortDir === 'asc',
+                                        'w-4 h-4 ml-1 inline-block align-middle text-blue-600' : currentSortDir === 'desc'
+                                        }"
+                            >
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </div>
+
+                        <!-- RESPONSES -->
+                        <div
+                            class="w-1/3 text-center text-2xl font-semibold">Responses</div>
+                    </div>
+                </li>
+
+                <div class="overflow-y-auto max-h-96">
+                    <QuizTableRow v-for="user in userList" :user="user" :key="user.id" />
                 </div>
-            </li>
-
-            <QuizTableRow v-for="user in userList" :user="user" :key="user.id" />
-        </ul>
+            </ul>
+        </div>
     </div>
+
 </template>
 
 <script>
     import QuizTableRow from '../../Components/QuizTableRow.vue';
+    import PrimaryButton from '../../Components/PrimaryButton.vue';
 
     export default {
         data() {
@@ -93,10 +106,12 @@
                 sortDirection: 'asc',
                 currentSort: 'id',
                 currentSortDir: 'asc',
+                searchText: ''
             }
         },
         components: {
             QuizTableRow,
+            PrimaryButton
         },
         props: {
             user: Object,
@@ -109,7 +124,8 @@
                 axios.get('/sortQuizTableRows', {
                     params: {
                         sort: sort,
-                        direction: this.sortDirection
+                        direction: this.sortDirection,
+                        search: this.searchText
                     }
                 })
                     .then(response => {
@@ -127,6 +143,20 @@
                 } else {
                     return 'asc';
                 }
+            },
+            search() {
+                axios.get('/searchQuizTableRows', {
+                    params: {
+                        search: this.searchText
+                    }
+                })
+                    .then(response => {
+                        this.userList = response.data.users;
+                        this.searchText = response.data.search
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
             }
         },
         mounted() {
