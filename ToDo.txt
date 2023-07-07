@@ -1,0 +1,14 @@
+TODO:
+ - ADMIN
+    - make it so you can click on the email and takes you to a form to send an email directly
+          to the person
+
+ - PROFILE:
+    -
+
+ - Resume
+    - handle errors for too big files and wrong file types
+
+ - OTHER
+    - Add real text to site
+BUGS:
