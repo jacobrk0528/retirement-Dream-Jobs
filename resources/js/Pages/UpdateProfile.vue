@@ -32,10 +32,10 @@
 
 <script setup>
 import AppLayout from '../Layouts/AppLayout.vue';
-import DeleteUserForm from '../Components/DeleteUserForm.vue';
+import DeleteUserForm from './Profile/Partials/DeleteUserForm.vue';
 import SectionBorder from '../Components/SectionBorder.vue';
-import UpdatePasswordForm from '../Components/UpdatePasswordForm.vue';
-import UpdateProfileInformationForm from '../Components/UpdateProfileInformationForm.vue';
+import UpdatePasswordForm from './Profile/Partials/UpdatePasswordForm.vue';
+import UpdateProfileInformationForm from './Profile/Partials/UpdateProfileInformationForm.vue';
 
 defineProps({
     user: {
