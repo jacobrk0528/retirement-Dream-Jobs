@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit96690a9080c0b3e399ae9ace975df3df
+class ComposerStaticInitcf0edad6a7de18107250aa453cfecef7
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -584,13 +584,7 @@ class ComposerStaticInit96690a9080c0b3e399ae9ace975df3df
         'App\\Actions\\Jetstream\\DeleteUser' => __DIR__ . '/../..' . '/app/Actions/Jetstream/DeleteUser.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
-        'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
-        'App\\Http\\Controllers\\ContactController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContactController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
-        'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
-        'App\\Http\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/IndexController.php',
-        'App\\Http\\Controllers\\QuizController' => __DIR__ . '/../..' . '/app/Http/Controllers/QuizController.php',
-        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -602,10 +596,6 @@ class ComposerStaticInit96690a9080c0b3e399ae9ace975df3df
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
-        'App\\Http\\Middleware\\adminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/adminMiddleware.php',
-        'App\\Mail\\ContactMail' => __DIR__ . '/../..' . '/app/Mail/ContactMail.php',
-        'App\\Mail\\QuizMail' => __DIR__ . '/../..' . '/app/Mail/QuizMail.php',
-        'App\\Models\\QuizResults' => __DIR__ . '/../..' . '/app/Models/QuizResults.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
@@ -6746,10 +6736,10 @@ class ComposerStaticInit96690a9080c0b3e399ae9ace975df3df
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit96690a9080c0b3e399ae9ace975df3df::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit96690a9080c0b3e399ae9ace975df3df::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit96690a9080c0b3e399ae9ace975df3df::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit96690a9080c0b3e399ae9ace975df3df::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcf0edad6a7de18107250aa453cfecef7::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcf0edad6a7de18107250aa453cfecef7::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitcf0edad6a7de18107250aa453cfecef7::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitcf0edad6a7de18107250aa453cfecef7::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -12,7 +12,7 @@
 
         <!-- HAMBURGER -->
         <div v-if="Auth" class="mx-6 sm:mr-2 self-center">
-            <Hamburger />
+            <Hamburger/>
         </div>
         <div v-else class="ml-auto mr-6 sm:mr-2 self-center">
             <LoginRegister/>

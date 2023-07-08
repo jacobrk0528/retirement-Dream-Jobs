@@ -48,8 +48,8 @@ Route::get('/admin')->name('admin')->uses([AdminController::class, 'show'])->mid
 Route::get('userProfile/{id}', [UserController::class, 'showOtherProfile'])->name('userProfile')->middleware('admin');
 
 // resume
-Route::post('file-upload', [resumeController::class, 'store'])->name('file.store');
-Route::get('file-download/{userId}', [resumeController::class, 'downloadResume'])->name('file.download')->middleware('admin');
+Route::post('/file-upload', [resumeController::class, 'store'])->name('file.store');
+Route::get('userProfile/file-download/{userId}', [resumeController::class, 'downloadResume'])->name('file.download')->middleware('admin');
 Route::get('/file-uploaded/{userId}', [resumeController::class, 'isUploaded'])->name('resume-uploaded');
 
 // ------------------ API Routes ------------------ //

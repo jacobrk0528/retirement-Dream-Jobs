@@ -22,8 +22,8 @@ export default {
     },
     props: {
         Auth: {
-        type: Boolean,
-        required: true
+            type: Boolean,
+            required: true
         }
     },
 }

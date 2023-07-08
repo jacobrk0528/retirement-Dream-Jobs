@@ -46,7 +46,7 @@
         </div>
       </form>
 
-        <div v-if="success" class="fixed bottom-0 right-0 m-4 bg-teal-300 text-black p-4 rounded">
+        <div v-if="success" class="fixed bottom-25 right-0 m-4 bg-teal-300 text-black p-4 rounded">
             {{ successMessage }}
         </div>
     </AppLayout>

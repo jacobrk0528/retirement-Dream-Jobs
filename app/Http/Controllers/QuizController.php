@@ -103,7 +103,7 @@ class QuizController extends Controller
         $user->quiz_completed = true;
 
         // save timestamp
-        $user->quiz_completed_at = now();
+        $user->updated_at = now();
         $user->save();
 
         // get user's quiz results
