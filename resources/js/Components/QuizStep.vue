@@ -35,7 +35,8 @@
         <!-- NAVIGATION BUTTONS -->
         <div class="flex justify-between m-12">
             <PrimaryButton @click="$emit('prev')">Previous</PrimaryButton>
-            <PrimaryButton :disabled="isDisabled" @click="$emit('continue')">Next</PrimaryButton>
+	    <PrimaryButton v-if="questionNumber == 0" @click="$emit('continue')">Next</PrimaryButton>
+	    <PrimaryButton v-else :disabled="isDisabled" @click="$emit('continue')">Next</PrimaryButton>
         </div>
         </div>
     </div>
@@ -70,7 +71,6 @@ export default {
     },
     methods: {
         updateAnswer(answer) {
-            console.log(answer)
             axios.post('/update-quiz', {
                 answer: answer,
                 question: this.questionNumber

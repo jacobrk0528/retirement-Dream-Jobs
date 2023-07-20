@@ -110,9 +110,6 @@
                 window.location = '/user/profile#Password';
             }
         },
-        mounted() {
-            console.log(this.visiting);
-        }
     };
 </script>
 

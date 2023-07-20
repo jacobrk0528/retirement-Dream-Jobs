@@ -20,7 +20,7 @@ class resumeController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'file' => 'required|mimes:pdf|max:2048',
+            'file' => 'required|mimes:pdf|max:10240',
         ]);
 
         $fileName = $user->name . '_resume.pdf';

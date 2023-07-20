@@ -107,7 +107,6 @@
         mounted() {
             axios.post('/setup-quiz')
                 .then(response => {
-                    console.log(response);
                 })
                 .catch(error => {
                     console.log(error);
