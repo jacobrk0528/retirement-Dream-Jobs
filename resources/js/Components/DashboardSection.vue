@@ -135,7 +135,6 @@ export default {
             }
         },
         async resumeLabel() {
-            console.log(this.user.id);
             try {
                 const response = await axios.get(`/file-uploaded/${this.user.id}`);
                 if (response.data.uploaded == true) {

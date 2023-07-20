@@ -2,7 +2,7 @@
     <div class="absolute flex bg-teal-200 bg-opacity-70 h-24 w-screen">
         <!-- LOGO -->
         <a href="/" class="flex justify-center items-center mx-6 md:ml-4 sm:ml-2 sm:w-1/3">
-            <img src="/images/Logo.PNG" alt="img" class="object-cover h-auto max-h-24">
+            <img src="/storage/logo/logo.png" alt="img" class="object-cover h-auto max-h-24">
         </a>
 
         <!-- TITLE -->

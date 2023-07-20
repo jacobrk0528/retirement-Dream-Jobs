@@ -113,8 +113,8 @@ class QuizController extends Controller
             'email' => $user->email
         ];
 
-        // send email to admin
-        Mail::to('example@email.com')
-            ->send(new QuizMail($results, $userDetails));
+	// send email to admin
+	// Mail::to('example@email.com')
+	//	->send(new QuizMail($results, $userDetails));
     }
 }
