@@ -2,9 +2,10 @@
     <div class="ml-2 relative">
         <Dropdown align="right" width="48">
             <template #trigger>
-                <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full transition">
-                    <img class="h-16 w-16 rounded-full object-cover" :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name">
+                <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex items-center justify-center border-2 border-transparent transition">
+                    <img class="rounded-full object-cover size" :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name">
                 </button>
+
                 <span v-else class="inline-flex rounded-md">
                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 transition ease-in-out duration-150">
                         {{ $page.props.auth.user.name }}
@@ -64,3 +65,10 @@ export default {
     }
 }
 </script>
+
+<style>
+    .size {
+        max-width: 4rem;
+        height: 4rem;
+    }
+</style>
