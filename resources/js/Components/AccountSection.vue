@@ -76,7 +76,7 @@
                 name: this.user.name,
                 email: this.user.email,
                 phone: this.formatPhone(),
-                dob: this.user.dob
+                dob: this.formatDOB(this.user.dob)
             }
         },
         props: {
@@ -102,6 +102,9 @@
                     return `(${phone.substring(0, 3)}) ${phone.substring(3, 6)}-${phone.substring(6)}`;
                 }
                 return '';
+            },
+            formatDOB(dob) {
+                return dob;
             },
             redirectToProfile() {
                 window.location = '/user/profile';

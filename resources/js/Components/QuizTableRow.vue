@@ -1,22 +1,22 @@
 <template>
     <li>
-        <div class="flex justify-between border-t-2 border-black">
+        <div class="flex w-fit justify-between border-t-2 border-black">
             <!-- ID -->
-            <div class="w-1/12 flex items-center justify-center">
+            <div class="w-12 flex items-center justify-center">
                 <div class="text-center cursor-pointer hover:text-blue-800" @click="goToProfile">{{ user.id }}</div>
             </div>
             <!-- NAME -->
-            <div class="w-1/5 flex items-center justify-center">
+            <div class="w-44 flex items-center justify-center">
                 <div class="text-center cursor-pointer hover:text-blue-800" @click="goToProfile">{{ user.name }}</div>
             </div>
             <!-- Email -->
-            <div class="w-1/3 flex items-center justify-center">
+            <div class="w-64 flex items-center justify-center">
                 <div class="text-center">{{ user.email }}</div>
             </div>
             <!-- RESPONSES -->
-            <div class="w-1/3 text-center items-center flex justify-center" v-if="questionAnswers">
+            <div class="w-64 text-center items-center flex justify-center" v-if="questionAnswers">
                 <div v-if="showAnswers" class="flex-col w-full">
-                    <template v-for="answer in questionAnswers" :key="question">
+                    <template v-for="answer in questionAnswers">
                         <p class="my-2">{{ answer }}</p>
                     </template>
 

@@ -111,14 +111,48 @@
 
             <!-- DOB -->
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="dob" value="Date Of Birth"/>
-                <TextInput
-                    id="dob"
-                    v-model="form.dob"
-                    type="text"
-                    class="mt-1 block w-full"
-                    autocomplete="dob"
-                />
+                <InputLabel for="dob" value="Date Of Birth (mm/dd/yyyy)"/>
+                <div class="flex justify-between sm:flex-col w-full">
+                    <!-- Month -->
+                    <div class="w-1/4 sm:w-full">
+                        <InputLabel class="ml-2" for="dob.month" value="Month (mm)"/>
+                        <TextInput
+                            id="dob.month"
+                            v-model="form.month"
+                            type="number"
+                            max="12"
+                            min="1"
+                            class="mt-1 block w-full"
+                            autocomplete="month"
+                        />
+                    </div>
+                    <!-- Day -->
+                    <div class="w-1/4 sm:w-full">
+                        <InputLabel class="ml-2" for="dob.day" value="Day (dd)"/>
+                        <TextInput
+                            id="dob.day"
+                            v-model="form.day"
+                            type="number"
+                            max="31"
+                            min="1"
+                            class="mt-1 block w-full"
+                            autocomplete="day"
+                        />
+                    </div>
+                    <!-- Year -->
+                    <div class="w-1/4 sm:w-full">
+                        <InputLabel class="ml-2" for="dob.year" value="year (yyyy)"/>
+                        <TextInput
+                            id="dob.year"
+                            v-model="form.year"
+                            type="number"
+                            max="2023"
+                            min="1900"
+                            class="mt-1 block w-full"
+                            autocomplete="year"
+                        />
+                    </div>
+                </div>
                 <InputError :message="form.errors.dob" class="mt-2" />
             </div>
         </template>
@@ -150,12 +184,28 @@ const props = defineProps({
     user: Object,
 });
 
+const formatDOB = (type) => {
+    let dob = props.user.dob;
+    if (dob && dob != "") {
+        if (type == 1) {
+            return dob.substring(0, 2);
+        } else if (type == 2) {
+            return dob.substring(3, 5);
+        } else if (type == 3) {
+            return dob.substring(6);
+        }
+    }
+    return "";
+}
+
 const form = useForm({
     _method: 'PUT',
     name: props.user.name,
     email: props.user.email,
     phone: props.user.phone,
-    dob: props.user.dob,
+    day:  formatDOB(2),
+    month: formatDOB(1),
+    year: formatDOB(3),
     photo: null,
 });
 

@@ -7,14 +7,14 @@
         </div>
 
         <!-- QUIZ TABLE -->
-        <div class="flex justify-center">
-            <ul class="flex flex-col my-10 mx-6 border-2 border-black bg-teal-100 w-full lg:w-3/4">
-                <li>
+        <div class="flex justify-center sm:mx-4">
+            <ul class="flex flex-col my-10 mx-6 border-2 border-black bg-teal-100 w-atuo lg:w-3/4 overflow-x-auto">
+                <li class="overflow-x-auto">
                     <div class="flex justify-between">
                         <!-- ID -->
                         <div
-                            :class="{'w-1/12 pl-4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800 text-blue-600' : currentSort === 'id',
-                                    'w-1/12 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800' : currentSort !== 'id'}"
+                            :class="{'w-12 pl-4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800 text-blue-600' : currentSort === 'id',
+                                    'w-12 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800' : currentSort !== 'id'}"
                             @click="sortItems('id')"
                         >
                             <p>ID</p>
@@ -36,8 +36,8 @@
 
                         <!-- NAME -->
                         <div
-                            :class="{'w-1/5 pl-4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800 text-blue-600' : currentSort === 'name',
-                                    'w-1/5 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800' : currentSort !== 'name'}"
+                            :class="{'w-44 pl-4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800 text-blue-600' : currentSort === 'name',
+                                    'w-44 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800' : currentSort !== 'name'}"
                             @click="sortItems('name')"
                         >
                             <p>Name</p>
@@ -59,8 +59,8 @@
 
                         <!-- EMAIL -->
                         <div
-                            :class="{'w-1/3 pl-4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800 text-blue-600' : currentSort === 'email',
-                                    'w-1/3 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800' : currentSort !== 'email'}"
+                            :class="{'w-64 pl-4 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800 text-blue-600' : currentSort === 'email',
+                                    'w-64 text-2xl font-semibold flex items-center justify-center cursor-pointer hover:text-blue-800' : currentSort !== 'email'}"
                             @click="sortItems('email')"
                         >
                             <p>Email</p>
@@ -82,13 +82,13 @@
 
                         <!-- RESPONSES -->
                         <div
-                            class="w-1/3 text-center text-2xl font-semibold">Responses</div>
+                            class="w-64 text-center text-2xl font-semibold">Responses</div>
                     </div>
                 </li>
 
-                <div class="overflow-y-auto max-h-96">
+                <li class="overflow-y-auto overflow-x-auto max-h-96">
                     <QuizTableRow v-for="user in userList" :user="user" :key="user.id" />
-                </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -158,9 +158,6 @@
                         console.log(error);
                     })
             }
-        },
-        mounted() {
-            console.log(this.usersList);
         }
     }
 

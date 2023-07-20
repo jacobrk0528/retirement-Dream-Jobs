@@ -20,9 +20,11 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-	    'phone' => ['', 'max:10'],
-            'dob' => [''],
-	    'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:5120'],
+	        'phone' => ['', 'max:10'],
+            'month' => ['max:2'],
+            'day' => ['max:2'],
+            'year' => ['max:4'],
+	        'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:5120'],
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
@@ -35,9 +37,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         } else {
             $user->forceFill([
                 'name' => $input['name'],
-		'email' => $input['email'],
-		'phone' => $input['phone'],
-                'dob' => $input['dob']
+                'email' => $input['email'],
+                'phone' => $input['phone'],
+                'dob' => $input['month'] . "/" . $input['day'] . "/" . $input['year']
             ])->save();
         }
     }
@@ -51,8 +53,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     {
         $user->forceFill([
             'name' => $input['name'],
-	    'email' => $input['email'],
-	    'phone' => $input['phone'],
+            'email' => $input['email'],
+            'phone' => $input['phone'],
             'dob' => $input['dob'],
             'email_verified_at' => null,
         ])->save();

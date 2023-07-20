@@ -1,15 +1,16 @@
 <template>
     <div v-if="step == 0">
         <QuizStep
-            questionNumber = 0
+            :questionNumber = step
             question = "Would you like to begin the quiz?"
+            options = ""
             @cancel="cancel"
             @continue="nextStep"
         ></QuizStep>
     </div>
     <div v-if="step == 1">
         <QuizStep
-            questionNumber = 1
+            :questionNumber = step
             question = "First Question?"
             options = "option 1, option 2, option 3"
             @prev="prevStep"
@@ -18,7 +19,7 @@
     </div>
     <div v-if="step == 2">
         <QuizStep
-            questionNumber = 2
+            :questionNumber = step
             question = "Second Question?"
             options = "option 1, option 2, option 3"
             @prev="prevStep"
@@ -27,7 +28,7 @@
     </div>
     <div v-if="step == 3">
         <QuizStep
-            questionNumber = 3
+            :questionNumber = step
             question = "Third Question?"
             options = "option 1, option 2, option 3"
             @prev="prevStep"
@@ -36,7 +37,7 @@
     </div>
     <div v-if="step == 4">
         <QuizStep
-            questionNumber = 4
+            :questionNumber = step
             question = "Fourth Question?"
             options = "option 1, option 2, option 3"
             @prev="prevStep"
@@ -45,7 +46,7 @@
     </div>
     <div v-if="step == 5">
         <QuizStep
-            questionNumber = 5
+            :questionNumber = step
             question = "Fifth Question?"
             options = "option 1, option 2, option 3"
             @prev="prevStep"
