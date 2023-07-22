@@ -5,7 +5,7 @@
         </div>
     </div>
 
-    <div class="flex justify-center my-12">
+    <div class="flex justify-center my-8">
         <div class="w-10/12">
             <h3 class="text-2xl uppercase sm:text-center">{{ Label }}</h3>
             <div class="sm:flex">

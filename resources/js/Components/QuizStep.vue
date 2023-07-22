@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-center w-full height">
-        <div class="w-1/2 my-auto bg-white rounded-xl">
+        <div class="w-1/2 my-auto sm:w-full sm:mx-4 bg-white rounded-xl">
         <!-- HEADER -->
         <div class="h-16 w-full bg-teal-200 opacity-70 flex justify-center items-center rounded-t-xl">
             <h1 class="text-3xl font-bold">Quiz</h1>
@@ -33,10 +33,11 @@
         </div>
 
         <!-- NAVIGATION BUTTONS -->
-        <div class="flex justify-between m-12">
+        <div class="flex justify-between m-12 sm:m-4">
             <PrimaryButton @click="$emit('prev')">Previous</PrimaryButton>
-	    <PrimaryButton v-if="questionNumber == 0" @click="$emit('continue')">Next</PrimaryButton>
-	    <PrimaryButton v-else :disabled="isDisabled" @click="$emit('continue')">Next</PrimaryButton>
+            <PrimaryButton v-if="questionNumber == 0" @click="$emit('continue')">Next</PrimaryButton>
+            <PrimaryButton v-else-if="questionNumber == 5" @click="$emit('submit')">Submit</PrimaryButton>
+            <PrimaryButton v-else :disabled="isDisabled" @click="$emit('continue')">Next</PrimaryButton>
         </div>
         </div>
     </div>

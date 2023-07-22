@@ -2,7 +2,7 @@
     <div class="flex flex-col min-h-screen bg-gray-100">
       <Header :Auth="Auth" />
 
-      <div class="pt-24 flex-grow">
+      <div class="mt-24 height flex-grow">
           <slot />
       </div>
 
@@ -28,3 +28,9 @@ export default {
     },
 }
 </script>
+
+<style>
+.height {
+    min-height: calc(100vh - 12rem);
+}
+</style>

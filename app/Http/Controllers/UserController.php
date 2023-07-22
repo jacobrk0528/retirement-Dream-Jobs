@@ -67,6 +67,16 @@ class UserController extends Controller
 
         return Inertia::render('Profile', [
             "user" => $user,
+            "successMessage" => null
+        ]);
+    }
+    public function showSuccess()
+    {
+        $user = Auth::user();
+
+        return Inertia::render('Profile', [
+            "user" => $user,
+            "successMessage" => "Successfully submited quiz!"
         ]);
     }
 }
