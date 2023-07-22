@@ -51,13 +51,8 @@
             options = "option 1, option 2, option 3"
             @prev="prevStep"
             @continue="nextStep"
+            @submit="submit"
         ></QuizStep>
-    </div>
-    <div v-if="step == maxSteps">
-        <QuizSubmit
-        @prev="prevStep"
-        @submit="submit"
-        ></QuizSubmit>
     </div>
 </template>
 
@@ -97,7 +92,7 @@
             submit() {
                 axios.post('/submit-quiz')
                     .then(response => {
-                        window.location.pathname = '/profile';
+                        window.location.pathname = '/profile/success';
                     })
                     .catch(error => {
                         console.log(error);
