@@ -14,60 +14,40 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
-        User::factory()->create([
+        User::factory()->afterCreating(function (User $user) {
+            $user->metas()->create([
+                'user_id' => $user->id,
+                'quiz_results' => json_encode([
+                    'Question1Answer' => '',
+                    'Question2Answer' => '',
+                    'Question3Answer' => '',
+                    'Question4Answer' => '',
+                    'Question5Answer' => '',
+                ]),
+                'phone' => '8434762438',
+                'dob' => '05/28/2004',
+            ]);
+        })->create([
             'name' => 'Jacob Krebs',
             'role' => 'admin',
-            'email' => 'Jacob@email.com',
-            'email_verified_at' => Carbon::now(),
+            'email' => 'jacob@email.com',
+            'email_verified_at' => now(),
             'password' => bcrypt('password'),
         ]);
-        User::factory()->create([
-            'name' => 'Hannah Krebs',
-            'role' => 'user',
-            'email' => 'Hannah@email.com',
-            'email_verified_at' => Carbon::now(),
-            'password' => bcrypt('password'),
-            'quiz_completed' => 1,
-            'quiz_results' => json_encode([
-                'Question1Answer' => 'Answer1',
-                'Question2Answer' => 'Answer2',
-                'Question3Answer' => 'Answer1',
-                'Question4Answer' => 'Answer2',
-                'Question5Answer' => 'Answer1',
-            ]),
-        ]);
-        User::factory()->create([
-            'name' => 'Shelley Krebs',
-            'role' => 'user',
-            'email' => 'Shelley@email.com',
-            'email_verified_at' => Carbon::now(),
-            'password' => bcrypt('password'),
-            'quiz_completed' => 1,
-            'quiz_results' => json_encode([
-                'Question1Answer' => 'Answer1',
-                'Question2Answer' => 'Answer2',
-                'Question3Answer' => 'Answer1',
-                'Question4Answer' => 'Answer2',
-                'Question5Answer' => 'Answer1',
-            ]),
-        ]);
-        User::factory()->create([
-            'name' => 'Joe Krebs',
-            'role' => 'user',
-            'email' => 'Joe@email.com',
-            'email_verified_at' => Carbon::now(),
-            'password' => bcrypt('password'),
-            'quiz_completed' => 1,
-            'quiz_results' => json_encode([
-                'Question1Answer' => 'Answer1',
-                'Question2Answer' => 'Answer2',
-                'Question3Answer' => 'Answer1',
-                'Question4Answer' => 'Answer2',
-                'Question5Answer' => 'Answer1',
-            ]),
-        ]);
-
-        User::factory()->count(100)->create();
+        User::factory()->afterCreating(function (User $user) {
+            $user->metas()->create([
+                'user_id' => $user->id,
+                'quiz_completed' => true,
+                'quiz_completed_at' => now(),
+                'quiz_results' => json_encode([
+                    'Question1Answer' => '1',
+                    'Question2Answer' => '2',
+                    'Question3Answer' => '3',
+                    'Question4Answer' => '4',
+                    'Question5Answer' => '5',
+                ]),
+                
+            ]);
+        })->count(100)->create();
     }
 }
