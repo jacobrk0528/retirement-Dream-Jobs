@@ -170,7 +170,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted} from 'vue';
 import { Link, router, useForm } from '@inertiajs/vue3';
 import ActionMessage from '@/Components/ActionMessage.vue';
 import FormSection from '@/Components/FormSection.vue';
@@ -185,7 +185,7 @@ const props = defineProps({
 });
 
 const formatDOB = (type) => {
-    let dob = props.user.dob;
+    let dob = props.user.metas.dob;
     if (dob && dob != "") {
         if (type == 1) {
             return dob.substring(0, 2);
@@ -202,7 +202,7 @@ const form = useForm({
     _method: 'PUT',
     name: props.user.name,
     email: props.user.email,
-    phone: props.user.phone,
+    phone: props.user.metas?.phone || '',
     day:  formatDOB(2),
     month: formatDOB(1),
     year: formatDOB(3),
