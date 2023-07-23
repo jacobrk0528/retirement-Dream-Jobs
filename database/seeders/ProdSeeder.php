@@ -23,14 +23,14 @@ class ProdSeeder extends Seeder
                     'Question3Answer' => '',
                     'Question4Answer' => '',
                     'Question5Answer' => '',
-                ])
+                ]),
+                'phone' => '8434762438',
+                'dob' => '05/28/2004',
             ]);
         })->create([
             'name' => 'Jacob Krebs',
             'role' => 'admin',
             'email' => 'jacob@email.com',
-            'phone' => '8434762438',
-            'dob' => '05/28/2004',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
         ]);
