@@ -24,7 +24,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+        $user = [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
@@ -33,19 +33,10 @@ class UserFactory extends Factory
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
             'role' => 'user',
-            'phone' => null,
-            'dob' => null,
-            'quiz_completed' => 1,
-            'quiz_results' => json_encode([
-                'Question1Answer' => 'Answer1',
-                'Question2Answer' => 'Answer2',
-                'Question3Answer' => 'Answer1',
-                'Question4Answer' => 'Answer2',
-                'Question5Answer' => 'Answer1',
-            ]),
             'profile_photo_path' => null,
             'current_team_id' => null,
         ];
+        return $user;
     }
 
     /**

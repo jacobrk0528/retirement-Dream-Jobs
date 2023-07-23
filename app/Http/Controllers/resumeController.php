@@ -28,8 +28,9 @@ class resumeController extends Controller
         $request->file->move(public_path('storage/resumes/'), $fileName);
 
         $user->resume_path = $fileName;
-        $user->updated_at = Carbon::now();
+        $user->metas->resume_uploaded_at = Carbon::now();
         $user->save();
+        $user->metas->save();
     }
 
 
@@ -54,7 +55,7 @@ class resumeController extends Controller
     public function isUploaded($userId) {
         $user = User::findOrFail($userId);
         if ($user->resume_path != null) {
-            return response()->json(['uploaded' => true, "uploaded_at" => Carbon::parse($user->updated_at)->format('d / m / Y')]);
+            return response()->json(['uploaded' => true, "uploaded_at" => Carbon::parse($user->metas->resume_uploaded_at)->format('m / d / Y')]);
         } else {
             return response()->json(['uploaded' => false]);
         }

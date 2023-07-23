@@ -100,15 +100,6 @@
                     });
             }
         },
-        mounted() {
-            axios.post('/setup-quiz')
-                .then(response => {
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-
     };
 </script>
 

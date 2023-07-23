@@ -70,7 +70,7 @@ export default {
         }
     },
     created() {
-        this.questionAnswers = JSON.parse(this.user.quiz_results);
+        this.questionAnswers = JSON.parse(this.user.metas.quiz_results);
     },
     methods: {
         showOrHideAnswers() {

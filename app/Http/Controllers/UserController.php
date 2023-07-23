@@ -9,27 +9,6 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
-    // UPDATE USER PROFILE
-    public function update(Request $request)
-    {
-        $userId = Auth::id();
-
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'email'
-        ]);
-
-        $filteredData = array_filter($validatedData, function ($value) {
-            return $value !== null;
-        });
-
-        $user = User::find($userId);
-
-        if ($user) {
-            $user->update($filteredData);
-        }
-    }
-
     // SHOW USER PROFILE UPDATE PAGE
     public function showUpdateProfile() {
         $user = Auth::user();
@@ -65,8 +44,10 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
+
         return Inertia::render('Profile', [
             "user" => $user,
+            "metas" => $user->metas ? $user->metas : null,
             "successMessage" => null
         ]);
     }

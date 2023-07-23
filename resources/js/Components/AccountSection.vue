@@ -76,7 +76,7 @@
                 name: this.user.name,
                 email: this.user.email,
                 phone: this.formatPhone(),
-                dob: this.formatDOB(this.user.dob)
+                dob: this.user && this.user.metas && this.user.metas.dob ? this.user.metas.dob : '',
             }
         },
         props: {
@@ -97,14 +97,11 @@
         },
         methods: {
             formatPhone() {
-                if (this.user && this.user.phone) {
-                    let phone = this.user.phone;
+                if (this.user && this.user.metas && this.user.metas.phone) {
+                    let phone = this.user.metas.phone;
                     return `(${phone.substring(0, 3)}) ${phone.substring(3, 6)}-${phone.substring(6)}`;
                 }
                 return '';
-            },
-            formatDOB(dob) {
-                return dob;
             },
             redirectToProfile() {
                 window.location = '/user/profile';

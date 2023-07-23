@@ -8,7 +8,7 @@
 
         <!-- QUIZ TABLE -->
         <div class="flex justify-center sm:mx-4">
-            <ul class="flex flex-col my-10 mx-6 border-2 border-black bg-teal-100 w-atuo lg:w-3/4 overflow-x-auto">
+            <ul class="flex flex-col my-10 mx-6 border-2 border-black bg-teal-100 w-auto overflow-x-auto">
                 <li class="overflow-x-auto">
                     <div class="flex justify-between">
                         <!-- ID -->
@@ -145,11 +145,14 @@
                 }
             },
             search() {
-                axios.get('/searchQuizTableRows', {
-                    params: {
-                        search: this.searchText
-                    }
-                })
+                if (this.searchText == "") {
+                    window.location.pathname = "/admin"
+                } else {
+                    axios.get('/searchQuizTableRows', {
+                        params: {
+                            search: this.searchText
+                        }
+                    })
                     .then(response => {
                         this.userList = response.data.users;
                         this.searchText = response.data.search
@@ -157,6 +160,7 @@
                     .catch(error => {
                         console.log(error);
                     })
+                }
             }
         }
     }

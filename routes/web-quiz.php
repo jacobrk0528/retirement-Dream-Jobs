@@ -8,10 +8,6 @@ Route::get('/quiz')
     ->uses([QuizController::class, 'show'])
     ->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
 
-Route::post('/setup-quiz', [QuizController::class, 'setup'])
-    ->name('setup-quiz')
-    ->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
-
 Route::get('/get-quiz-answer', [QuizController::class, 'getAnswer'])
     ->name('get-quiz-answer')
     ->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);

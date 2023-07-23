@@ -38,9 +38,14 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->forceFill([
                 'name' => $input['name'],
                 'email' => $input['email'],
-                'phone' => $input['phone'],
-                'dob' => $input['month'] . "/" . $input['day'] . "/" . $input['year']
             ])->save();
+            $user->metas()->updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'phone' => $input['phone'],
+                    'dob' => $input['month'] . "/" . $input['day'] . "/" . $input['year']
+                ]
+            );
         }
     }
 
@@ -54,10 +59,15 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         $user->forceFill([
             'name' => $input['name'],
             'email' => $input['email'],
-            'phone' => $input['phone'],
-            'dob' => $input['dob'],
             'email_verified_at' => null,
         ])->save();
+        $user->metas()->updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'phone' => $input['phone'],
+                'dob' => $input['month'] . "/" . $input['day'] . "/" . $input['year']
+            ]
+        );
 
         $user->sendEmailVerificationNotification();
     }

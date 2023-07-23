@@ -22,34 +22,15 @@ class QuizController extends Controller
 
         return Inertia::render('Quiz', [
             "user" => $user,
+            "metas" => $user->metas ? $user->metas : null,
             "results" => $results
         ]);
-    }
-
-    public function setup() {
-        $user = Auth::user();
-
-        $existingData = json_decode($user->quiz_results, true);
-
-        if ($existingData == null){
-            $existingData['Question1Answer'] = '';
-            $existingData['Question2Answer'] = '';
-            $existingData['Question3Answer'] = '';
-            $existingData['Question4Answer'] = '';
-            $existingData['Question5Answer'] = '';
-
-            $newData = json_encode($existingData);
-
-            $user->quiz_results = $newData;
-
-            $user->save();
-        }
     }
 
     public function update(Request $request)
     {
         $user = Auth::user();
-        $results = json_decode($user->quiz_results);
+        $results = json_decode($user->metas->quiz_results);
 
         if ($request->input('question') == 1){
             $results->Question1Answer = $request->input('answer');
@@ -63,14 +44,20 @@ class QuizController extends Controller
             $results->Question5Answer = $request->input('answer');
         }
 
-        $user->quiz_results = json_encode($results);
-        $user->save();
+        $user->metas()->updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'quiz_results' => json_encode($results)
+            ]
+        );
     }
 
     public function getAnswer(Request $request)
     {
         $user = Auth::user();
-        $results = json_decode($user->quiz_results);
+        //---------------
+        // dd($user->metas->quiz_results);
+        $results = json_decode($user->metas->quiz_results);
 
         if ($request->input('question') == 1){
             return $results->Question1Answer;
@@ -84,14 +71,14 @@ class QuizController extends Controller
             return $results->Question5Answer;
         }
 
-        return $results->Question1Answer;
+        return 'error';
     }
 
     public function isCompleted() {
         $user = Auth::user();
         $completedData = [
-            "completed" => !!$user->quiz_completed,
-            'completed_at' => Carbon::parse($user->quiz_completed_at)->format('d / m / Y')
+            "completed" => !!$user->metas->quiz_completed,
+            'completed_at' => Carbon::parse($user->metas->quiz_completed_at)->format('m / d / Y')
         ];
         return $completedData;
     }
@@ -100,14 +87,12 @@ class QuizController extends Controller
         $user = Auth::user();
 
         // mark user as completed
-        $user->quiz_completed = true;
-
-        // save timestamp
-        $user->updated_at = now();
-        $user->save();
+        $user->metas->quiz_completed = true;
+        $user->metas->quiz_completed_at = now();
+        $user->metas->save();
 
         // get user's quiz results
-        $results = json_decode($user->quiz_results, true);
+        $results = json_decode($user->metas->quiz_results, true);
         $userDetails = [
             'name' => $user->name,
             'email' => $user->email
