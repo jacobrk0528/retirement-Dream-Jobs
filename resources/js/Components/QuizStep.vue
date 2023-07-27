@@ -11,7 +11,7 @@
             <!-- Question -->
             <div class="ml-4 mt-12">
                 <h5 class="text-xl font-semibold">
-                    Question {{ questionNumber }}
+                    {{ question }}
                 </h5>
             </div>
 
@@ -35,8 +35,11 @@
         <!-- NAVIGATION BUTTONS -->
         <div class="flex justify-between m-12 sm:m-4">
             <PrimaryButton @click="$emit('prev')">Previous</PrimaryButton>
+
+            <p>{{ questionNumber }} of {{ maxQuestions }}</p>
+
             <PrimaryButton v-if="questionNumber == 0" @click="$emit('continue')">Next</PrimaryButton>
-            <PrimaryButton v-else-if="questionNumber == 5" @click="$emit('submit')">Submit</PrimaryButton>
+            <PrimaryButton v-else-if="questionNumber == maxQuestions" @click="$emit('submit')">Submit</PrimaryButton>
             <PrimaryButton v-else :disabled="isDisabled" @click="$emit('continue')">Next</PrimaryButton>
         </div>
         </div>
@@ -58,6 +61,10 @@ export default {
     },
     props: {
         questionNumber: {
+            type: Number,
+            required: true
+        },
+        maxQuestions: {
             type: Number,
             required: true
         },

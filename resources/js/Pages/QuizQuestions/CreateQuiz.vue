@@ -3,7 +3,7 @@
         <QuizStep
             :questionNumber = step
             :maxQuestions = maxSteps
-            question = "Would you like to begin the quiz?"
+            question = "Are you ready to start the quiz?"
             options = ""
             @cancel="cancel"
             @continue="nextStep"
@@ -13,9 +13,9 @@
         <QuizStep
             :questionNumber = step
             :maxQuestions = maxSteps
-            question = "What time of day do you perfer to work"
-            options = "Mornings (6:00-12:00), Mid-day (10:00 - 4:00), Afternoons (1:00 - 7:00)"
-            @prev="prevStep"
+            question = "What time of day do you feel most productive?"
+            options = "Morning, Afternoon, Evening"
+            @cancel="cancel"
             @continue="nextStep"
         ></QuizStep>
     </div>
@@ -23,8 +23,8 @@
         <QuizStep
             :questionNumber = step
             :maxQuestions = maxSteps
-            question = "Second Question?"
-            options = "option 1, option 2, option 3"
+            question = "How do you prefer to work with others?"
+            options = "Collaboratively in a team, Independently, Both in team and individual settings, It doesn't matter to me"
             @prev="prevStep"
             @continue="nextStep"
         ></QuizStep>
@@ -33,8 +33,8 @@
         <QuizStep
             :questionNumber = step
             :maxQuestions = maxSteps
-            question = "Third Question?"
-            options = "option 1, option 2, option 3"
+            question = "Which work environment appeals to you the most?"
+            options = "Indoors, Outdoors, Both indoor and outdoor settings, I have no preference"
             @prev="prevStep"
             @continue="nextStep"
         ></QuizStep>
@@ -43,8 +43,8 @@
         <QuizStep
             :questionNumber = step
             :maxQuestions = maxSteps
-            question = "Fourth Question?"
-            options = "option 1, option 2, option 3"
+            question = "How do you handle challenges in a work setting?"
+            options = "Analyze and strategize solutions, Seek guidance and advice from others, Embrace challenges and learn from experience, I prefer to avoid high-pressure situations"
             @prev="prevStep"
             @continue="nextStep"
         ></QuizStep>
@@ -53,8 +53,58 @@
         <QuizStep
             :questionNumber = step
             :maxQuestions = maxSteps
-            question = "Fifth Question?"
-            options = "option 1, option 2, option 3"
+            question = "What motivates you in a job?"
+            options = "Opportunities for creativity and innovation, Financial rewards and stability, Making a positive impact on others or the community, Personal growth and continuous learning"
+            @prev="prevStep"
+            @continue="nextStep"
+        ></QuizStep>
+    </div>
+    <div v-if="step == 6">
+        <QuizStep
+            :questionNumber = step
+            :maxQuestions = maxSteps
+            question = "Which of these interests you the most?"
+            options = "Art and Creativity, Technology and Innovation, Helping and Caring for Others, Outdoor Activities and Nature, Business and Entrepreneurship"
+            @prev="prevStep"
+            @continue="nextStep"
+        ></QuizStep>
+    </div>
+    <div v-if="step == 7">
+        <QuizStep
+            :questionNumber = step
+            :maxQuestions = maxSteps
+            question = "How important is work-life balance to you?"
+            options = "Extremely important; it's a top priority, Moderately important; I value it but can be flexible, Not a priority; work takes precedence"
+            @prev="prevStep"
+            @continue="nextStep"
+        ></QuizStep>
+    </div>
+    <div v-if="step == 8">
+        <QuizStep
+            :questionNumber = step
+            :maxQuestions = maxSteps
+            question = "Are you willing to undergo training or education for a new career?"
+            options = "Yes; I'm eager to learn and adapt, Maybe; if it's necessary for the job I'm interested in, No; I prefer a job that requires minimal training"
+            @prev="prevStep"
+            @continue="nextStep"
+        ></QuizStep>
+    </div>
+    <div v-if="step == 9">
+        <QuizStep
+            :questionNumber = step
+            :maxQuestions = maxSteps
+            question = "What are your preferred working hours?"
+            options = "Full-time; regular office hours, Part-time; flexible schedule, Project-based or freelance work, I am open to any working hours"
+            @prev="prevStep"
+            @continue="nextStep"
+        ></QuizStep>
+    </div>
+    <div v-if="step == 10">
+        <QuizStep
+            :questionNumber = step
+            :maxQuestions = maxSteps
+            question = "How important is social interaction in your ideal job?"
+            options = "Very important; I thrive in social settings, Moderately important; a balance of social and solitary time, Not important; I prefer working alone"
             @prev="prevStep"
             @continue="nextStep"
             @submit="submit"
@@ -70,7 +120,7 @@
         data() {
             return {
                 step: 0,
-                maxSteps: 6,
+                maxSteps: 10,
             }
         },
         props: {

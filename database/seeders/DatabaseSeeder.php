@@ -23,6 +23,11 @@ class DatabaseSeeder extends Seeder
                     'Question3Answer' => '',
                     'Question4Answer' => '',
                     'Question5Answer' => '',
+                    'Question6Answer' => '',
+                    'Question7Answer' => '',
+                    'Question8Answer' => '',
+                    'Question9Answer' => '',
+                    'Question10Answer' => '',
                 ]),
                 'phone' => '8434762438',
                 'dob' => '05/28/2004',
@@ -45,6 +50,11 @@ class DatabaseSeeder extends Seeder
                     'Question3Answer' => '3',
                     'Question4Answer' => '4',
                     'Question5Answer' => '5',
+                    'Question6Answer' => '6',
+                    'Question7Answer' => '7',
+                    'Question8Answer' => '8',
+                    'Question9Answer' => '9',
+                    'Question10Answer' => '10',
                 ]),
                 
             ]);

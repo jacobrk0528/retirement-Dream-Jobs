@@ -14,11 +14,12 @@
                 <div class="text-center">{{ user.email }}</div>
             </div>
             <!-- RESPONSES -->
-            <div class="w-64 text-center items-center flex justify-center" v-if="questionAnswers">
+            <div class="w-64 items-center flex justify-center mr-2" v-if="questionAnswers">
                 <div v-if="showAnswers" class="flex-col w-full">
-                    <template v-for="answer in questionAnswers">
-                        <p class="my-2">{{ answer }}</p>
+                    <template v-for="(answer, index) in questionAnswers" :key="index">
+                        <p class="my-2">{{ formatIndex(index) }}) {{ answer }}</p>
                     </template>
+
 
                     <div class="mt-2 w-2/3 mx-auto flex items-center justify-center cursor-pointer border-t-2 border-black border-dashed hover:text-blue-800" @click="showOrHideAnswers">
                         <p class="my-2 mr-1">Hide</p>
@@ -60,7 +61,8 @@ export default {
     data() {
         return {
             questionAnswers: null,
-            showAnswers: false
+            showAnswers: false,
+            answerNumber: 1,
         };
     },
     props: {
@@ -78,6 +80,9 @@ export default {
         },
         goToProfile() {
             window.location.href = `/userProfile/${this.user.id}`;
+        },
+        formatIndex(index) {
+            return (index.replace(/\D/g, ""));
         }
     }
 

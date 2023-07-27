@@ -42,6 +42,16 @@ class QuizController extends Controller
             $results->Question4Answer = $request->input('answer');
         } else if ($request->input('question') == 5){
             $results->Question5Answer = $request->input('answer');
+        } else if ($request->input('question') == 6){
+            $results->Question6Answer = $request->input('answer');
+        } else if ($request->input('question') == 7){
+            $results->Question7Answer = $request->input('answer');
+        } else if ($request->input('question') == 8){
+            $results->Question8Answer = $request->input('answer');
+        } else if ($request->input('question') == 9){
+            $results->Question9Answer = $request->input('answer');
+        } else if ($request->input('question') == 10){
+            $results->Question10Answer = $request->input('answer');
         }
 
         $user->metas()->updateOrCreate(
@@ -69,6 +79,16 @@ class QuizController extends Controller
             return $results->Question4Answer;
         } else if ($request->input('question') == 5){
             return $results->Question5Answer;
+        } else if ($request->input('question') == 6){
+            return $results->Question6Answer;
+        } else if ($request->input('question') == 7){
+            return $results->Question7Answer;
+        } else if ($request->input('question') == 8){
+            return $results->Question8Answer;
+        } else if ($request->input('question') == 9){
+            return $results->Question9Answer;
+        } else if ($request->input('question') == 10){
+            return $results->Question10Answer;
         }
 
         return 'error';
