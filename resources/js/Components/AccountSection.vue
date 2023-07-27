@@ -6,7 +6,8 @@
                 <!-- Profile IMG -->
                 <div class="flex flex-col justify-center max-w-36">
                     <div class="h-auto w-auto img-container">
-                        <img class="max-h-36 max-w-full" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
+                        <img v-if="getProfilePhotoType()" class="max-h-36 max-w-full" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
+                        <img v-else class="h-36 w-full" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
                     </div>
                 </div>
 
@@ -57,10 +58,15 @@
                     :disabled="visiting"
                 >Edit Profile</SecondaryButton>
                 <SecondaryButton
-                    class="w-36"
+                    class="w-36 mr-4"
                     @click="redirectToPassword"
                     :disabled="visiting"
                 >Reset Password</SecondaryButton>
+                <DangerButton 
+                    @click="confirmUserDeletion"
+                    v-if="visiting"
+                    >Delete Account
+                </DangerButton>
             </div>
         </div>
     </div>
@@ -68,6 +74,7 @@
 
 <script>
     import SecondaryButton from "./SecondaryButton.vue";
+    import DangerButton from "./DangerButton.vue";
 
     export default {
         data() {
@@ -93,7 +100,8 @@
             }
         },
         components: {
-            SecondaryButton
+            SecondaryButton,
+            DangerButton
         },
         methods: {
             formatPhone() {
@@ -108,8 +116,15 @@
             },
             redirectToPassword() {
                 window.location = '/user/profile#Password';
+            },
+            getProfilePhotoType() {
+                if (this.user.profile_photo_url.includes('storage')) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
-        },
+        }
     };
 </script>
 

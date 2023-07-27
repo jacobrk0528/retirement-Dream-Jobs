@@ -2,6 +2,7 @@
     <div v-if="step == 0">
         <QuizStep
             :questionNumber = step
+            :maxQuestions = maxSteps
             question = "Would you like to begin the quiz?"
             options = ""
             @cancel="cancel"
@@ -11,8 +12,9 @@
     <div v-if="step == 1">
         <QuizStep
             :questionNumber = step
-            question = "First Question?"
-            options = "option 1, option 2, option 3"
+            :maxQuestions = maxSteps
+            question = "What time of day do you perfer to work"
+            options = "Mornings (6:00-12:00), Mid-day (10:00 - 4:00), Afternoons (1:00 - 7:00)"
             @prev="prevStep"
             @continue="nextStep"
         ></QuizStep>
@@ -20,6 +22,7 @@
     <div v-if="step == 2">
         <QuizStep
             :questionNumber = step
+            :maxQuestions = maxSteps
             question = "Second Question?"
             options = "option 1, option 2, option 3"
             @prev="prevStep"
@@ -29,6 +32,7 @@
     <div v-if="step == 3">
         <QuizStep
             :questionNumber = step
+            :maxQuestions = maxSteps
             question = "Third Question?"
             options = "option 1, option 2, option 3"
             @prev="prevStep"
@@ -38,6 +42,7 @@
     <div v-if="step == 4">
         <QuizStep
             :questionNumber = step
+            :maxQuestions = maxSteps
             question = "Fourth Question?"
             options = "option 1, option 2, option 3"
             @prev="prevStep"
@@ -47,6 +52,7 @@
     <div v-if="step == 5">
         <QuizStep
             :questionNumber = step
+            :maxQuestions = maxSteps
             question = "Fifth Question?"
             options = "option 1, option 2, option 3"
             @prev="prevStep"

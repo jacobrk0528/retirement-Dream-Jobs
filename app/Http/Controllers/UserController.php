@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -59,5 +60,17 @@ class UserController extends Controller
             "user" => $user,
             "successMessage" => "Successfully submited quiz!"
         ]);
+    }
+
+    public function destroy(Request $request, StatefulGuard $guard)
+    {
+        app(DeletesUsers::class)->delete($request->user()->fresh());
+
+        $guard->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Inertia::location(url('/'));
     }
 }

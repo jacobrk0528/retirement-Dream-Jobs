@@ -2306,10 +2306,6 @@
                     "type": "custom"
                 },
                 {
-                    "url": "https://www.paypal.me/colinpodell/10.00",
-                    "type": "custom"
-                },
-                {
                     "url": "https://github.com/colinodell",
                     "type": "github"
                 },
@@ -2392,10 +2388,6 @@
             "funding": [
                 {
                     "url": "https://www.colinodell.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.paypal.me/colinpodell/10.00",
                     "type": "custom"
                 },
                 {
@@ -3328,10 +3320,6 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/paypalme/enunomaduro",
-                    "type": "custom"
-                },
-                {
                     "url": "https://github.com/nunomaduro",
                     "type": "github"
                 },
@@ -3416,10 +3404,6 @@
                 "source": "https://github.com/nunomaduro/termwind/tree/v1.15.1"
             },
             "funding": [
-                {
-                    "url": "https://www.paypal.com/paypalme/enunomaduro",
-                    "type": "custom"
-                },
                 {
                     "url": "https://github.com/nunomaduro",
                     "type": "github"
@@ -8883,10 +8867,6 @@
                 "source": "https://github.com/voku/portable-ascii/tree/2.0.1"
             },
             "funding": [
-                {
-                    "url": "https://www.paypal.me/moelleken",
-                    "type": "custom"
-                },
                 {
                     "url": "https://github.com/voku",
                     "type": "github"
