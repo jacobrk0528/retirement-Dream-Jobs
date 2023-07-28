@@ -8,7 +8,7 @@
                     </h1>
 
                     <div class="flex justify-evenly mt-12">
-                        <PrimaryButton @click="toggleDeleteScreen">Cancle</PrimaryButton>
+                        <PrimaryButton @click="toggleDeleteScreen">Cancel</PrimaryButton>
                         <DangerButton @click="deleteUser">Delete</DangerButton>
                     </div>
                 </div>
