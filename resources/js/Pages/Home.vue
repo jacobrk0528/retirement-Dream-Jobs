@@ -6,7 +6,7 @@
         </div>
 
         <!-- OUR MISSION -->
-        <TextSection title="Our Mission" class="pt-6">
+        <TextSection title="Our Mission" class="pt-6 text-lg">
             At Retirement Dream Jobs, our mission is to help you find your perfect post-retirement career path. 
             We believe that retirement opens doors to exciting opportunities, and our platform offers a personalized quiz designed to uncover your unique skills, 
             interests, and preferences. After taking the quiz, our dedicated team of administrators will carefully review your results and provide 
@@ -15,7 +15,7 @@
         </TextSection>
 
         <!-- HOW WE WORK -->
-        <TextSection title="How We Work" class="ml-auto">
+        <TextSection title="How We Work" class="ml-auto text-lg">
             At Retirement Dream Jobs, our process is simple and effective. First, sign up and take our comprehensive quiz that uncovers 
             your strengths and aspirations. Next, our expert team of administrators meticulously analyzes your quiz results. Finally, 
             we provide you with personalized job recommendations based on what aligns best with your skills and interests. With our streamlined approach, 
