@@ -23,7 +23,7 @@
 
                     <div class="mt-2 w-2/3 mx-auto flex items-center justify-center cursor-pointer border-t-2 border-black border-dashed hover:text-blue-800" @click="showOrHideAnswers">
                         <p class="my-2 mr-1">Hide</p>
-                        <svg xmlns="http://www.w3.org/2000/svg"
+                        <svg xmlns="https://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
@@ -38,7 +38,7 @@
                 </div>
                 <div class="flex items-center cursor-pointer hover:text-blue-800" v-else @click="showOrHideAnswers">
                     <p class="my-2 mr-1">Show Responses</p>
-                    <svg xmlns="http://www.w3.org/2000/svg"
+                    <svg xmlns="https://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"

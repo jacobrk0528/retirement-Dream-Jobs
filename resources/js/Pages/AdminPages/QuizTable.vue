@@ -18,7 +18,7 @@
                             @click="sortItems('id')"
                         >
                             <p>ID</p>
-                            <svg xmlns="http://www.w3.org/2000/svg"
+                            <svg xmlns="https://www.w3.org/2000/svg"
                                 v-if="currentSort == 'id'"
                                 viewBox="0 0 24 24"
                                 fill="none"
@@ -41,7 +41,7 @@
                             @click="sortItems('name')"
                         >
                             <p>Name</p>
-                            <svg xmlns="http://www.w3.org/2000/svg"
+                            <svg xmlns="https://www.w3.org/2000/svg"
                                 v-if="currentSort == 'name'"
                                 viewBox="0 0 24 24"
                                 fill="none"
@@ -64,7 +64,7 @@
                             @click="sortItems('email')"
                         >
                             <p>Email</p>
-                            <svg xmlns="http://www.w3.org/2000/svg"
+                            <svg xmlns="https://www.w3.org/2000/svg"
                                 v-if="currentSort == 'email'"
                                 viewBox="0 0 24 24"
                                 fill="none"
