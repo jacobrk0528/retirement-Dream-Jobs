@@ -62,15 +62,10 @@ class UserController extends Controller
         ]);
     }
 
-    public function destroy(Request $request, StatefulGuard $guard)
+    public function destroy(User $user)
     {
-        app(DeletesUsers::class)->delete($request->user()->fresh());
-
-        $guard->logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Inertia::location(url('/'));
+        if($user->role != 'admin') {
+            $user->delete();
+        }
     }
 }

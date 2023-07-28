@@ -1,4 +1,20 @@
 <template>
+    <div v-if="showDeleteScreen" class="absolute bg-gray-100 bg-opacity-60 w-screen" style="height: calc(100vh - 12rem);">
+        <div class="flex w-full h-full items-center justify-center">
+            <div class="bg-white flex w-full h-auto py-8 items-center justify-center text-center">
+                <div>
+                    <h1 class="text-xl font-bold">
+                        Are you sure you want to delete {{ $page.props.user.name }}'s account?
+                    </h1>
+
+                    <div class="flex justify-evenly mt-12">
+                        <PrimaryButton @click="toggleDeleteScreen">Cancle</PrimaryButton>
+                        <DangerButton @click="deleteUser">Delete</DangerButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Account Section -->
     <div class="flex justify-center mt-10 my-12 bg-white">
         <div class="w-10/12 my-2">
@@ -63,7 +79,7 @@
                     :disabled="visiting"
                 >Reset Password</SecondaryButton>
                 <DangerButton 
-                    @click="confirmUserDeletion"
+                    @click="toggleDeleteScreen"
                     v-if="visiting"
                     >Delete Account
                 </DangerButton>
@@ -75,6 +91,7 @@
 <script>
     import SecondaryButton from "./SecondaryButton.vue";
     import DangerButton from "./DangerButton.vue";
+    import PrimaryButton from "./PrimaryButton.vue";
 
     export default {
         data() {
@@ -84,6 +101,7 @@
                 email: this.user.email,
                 phone: this.formatPhone(),
                 dob: this.user && this.user.metas && this.user.metas.dob ? this.user.metas.dob : '',
+                showDeleteScreen: false,
             }
         },
         props: {
@@ -100,9 +118,10 @@
             }
         },
         components: {
-            SecondaryButton,
-            DangerButton
-        },
+    SecondaryButton,
+    DangerButton,
+    PrimaryButton
+},
         methods: {
             formatPhone() {
                 if (this.user && this.user.metas && this.user.metas.phone) {
@@ -123,7 +142,22 @@
                 } else {
                     return false;
                 }
-            }
+            },
+            toggleDeleteScreen() {
+                this.showDeleteScreen == true ? this.showDeleteScreen = false: this.showDeleteScreen = true;
+            },
+            deleteUser() {
+            console.log(this.user.id);
+
+            axios.delete(`/deleteUser/${this.user.id}`)
+                .then(response => {
+                    window.location.pathname = '/';
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+
         }
     };
 </script>

@@ -28,3 +28,7 @@ Route::get('/file-uploaded/{userId}', [resumeController::class, 'isUploaded'])
 
 Route::post('/updateUser', [UserController::class, 'update'])
     ->name('updateUser');
+
+Route::delete('/deleteUser/{user}', [UserController::class, 'destroy'])
+    ->name('deleteUser')
+    ->middleware('admin');
