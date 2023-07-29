@@ -56,7 +56,8 @@ export default {
     data() {
         return {
             questionAnswer: this.getAnswer(),
-            optionsList: this.options ? this.options.split(',') : ''
+            optionsList: this.options ? this.options.split(',') : '',
+            question: this.getQuestion()
         }
     },
     props: {
@@ -66,10 +67,6 @@ export default {
         },
         maxQuestions: {
             type: Number,
-            required: true
-        },
-        question: {
-            type: String,
             required: true
         },
         options: {
@@ -98,6 +95,15 @@ export default {
             })
             .then(response => {
                 this.questionAnswer = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
+        getQuestion() {
+            axios.get(`/get-quiz-question/${this.questionNumber}`)
+            .then(response => {
+                this.question = response.data;
             })
             .catch(error => {
                 console.log(error);

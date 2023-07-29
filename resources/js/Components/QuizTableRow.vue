@@ -1,6 +1,6 @@
 <template>
     <li>
-        <div class="flex w-fit justify-between border-t-2 border-black">
+        <div class="flex w-fit justify-between border-t-2 border-black h-12">
             <!-- ID -->
             <div class="w-12 flex items-center justify-center">
                 <div class="text-center cursor-pointer hover:text-blue-800" @click="goToProfile">{{ user.id }}</div>
@@ -14,42 +14,10 @@
                 <div class="text-center">{{ user.email }}</div>
             </div>
             <!-- RESPONSES -->
-            <div class="w-64 items-center flex justify-center mr-2" v-if="questionAnswers">
-                <div v-if="showAnswers" class="flex-col w-full">
-                    <template v-for="(answer, index) in questionAnswers" :key="index">
-                        <p class="my-2">{{ formatIndex(index) }}) {{ answer }}</p>
-                    </template>
-
-
-                    <div class="mt-2 w-2/3 mx-auto flex items-center justify-center cursor-pointer border-t-2 border-black border-dashed hover:text-blue-800" @click="showOrHideAnswers">
-                        <p class="my-2 mr-1">Hide</p>
-                        <svg xmlns="https://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="w-4 h-4 inline-block align-middle transform rotate-180"
-                        >
-                            <path d="M6 9l6 6 6-6" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="flex items-center cursor-pointer hover:text-blue-800" v-else @click="showOrHideAnswers">
-                    <p class="my-2 mr-1">Show Responses</p>
-                    <svg xmlns="https://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="w-4 h-4 inline-block align-middle mx-auto"
-                    >
-                        <path d="M6 9l6 6 6-6" />
-                    </svg>
-                </div>
+            <div class="w-64 items-center flex justify-center mr-2">
+                <button @click="showAnswers" class="hover:text-blue-800">
+                    View Responses
+                </button>
             </div>
         </div>
     </li>
@@ -61,7 +29,6 @@ export default {
     data() {
         return {
             questionAnswers: null,
-            showAnswers: false,
             answerNumber: 1,
         };
     },
@@ -75,8 +42,8 @@ export default {
         this.questionAnswers = JSON.parse(this.user.metas.quiz_results);
     },
     methods: {
-        showOrHideAnswers() {
-            this.showAnswers = !this.showAnswers;
+        showAnswers() {
+            window.location.href = `/show-Quiz-Results/${this.user.id}`;
         },
         goToProfile() {
             window.location.href = `/userProfile/${this.user.id}`;

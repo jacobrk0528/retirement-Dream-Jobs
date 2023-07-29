@@ -32,17 +32,7 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
         ]);
 
-        $user->metas()->create(
-            [
-                'quiz_results' => json_encode([
-                    'Question1Answer' => '',
-                    'Question2Answer' => '',
-                    'Question3Answer' => '',
-                    'Question4Answer' => '',
-                    'Question5Answer' => '',
-                ])
-            ]
-        );
+        $user->metas()->create();
 
         return $user;
     }
