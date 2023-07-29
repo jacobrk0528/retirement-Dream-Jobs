@@ -31,68 +31,32 @@ class QuizController extends Controller
     {
         $user = Auth::user();
         $results = json_decode($user->metas->quiz_results);
-
-        if ($request->input('question') == 1){
-            $results->Question1Answer = $request->input('answer');
-        } else if ($request->input('question') == 2){
-            $results->Question2Answer = $request->input('answer');
-        } else if ($request->input('question') == 3){
-            $results->Question3Answer = $request->input('answer');
-        } else if ($request->input('question') == 4){
-            $results->Question4Answer = $request->input('answer');
-        } else if ($request->input('question') == 5){
-            $results->Question5Answer = $request->input('answer');
-        } else if ($request->input('question') == 6){
-            $results->Question6Answer = $request->input('answer');
-        } else if ($request->input('question') == 7){
-            $results->Question7Answer = $request->input('answer');
-        } else if ($request->input('question') == 8){
-            $results->Question8Answer = $request->input('answer');
-        } else if ($request->input('question') == 9){
-            $results->Question9Answer = $request->input('answer');
-        } else if ($request->input('question') == 10){
-            $results->Question10Answer = $request->input('answer');
-        }
-
+    
+        $questionNumber = $request->input('question');
+        $answer = $request->input('answer');
+        $results->{"Question{$questionNumber}Answer"} = $answer;
+    
         $user->metas()->updateOrCreate(
             ['user_id' => $user->id],
-            [
-                'quiz_results' => json_encode($results)
-            ]
+            ['quiz_results' => json_encode($results)]
         );
     }
+    
 
     public function getAnswer(Request $request)
     {
         $user = Auth::user();
-        //---------------
-        // dd($user->metas->quiz_results);
         $results = json_decode($user->metas->quiz_results);
-
-        if ($request->input('question') == 1){
-            return $results->Question1Answer;
-        } else if ($request->input('question') == 2){
-            return $results->Question2Answer;
-        } else if ($request->input('question') == 3){
-            return $results->Question3Answer;
-        } else if ($request->input('question') == 4){
-            return $results->Question4Answer;
-        } else if ($request->input('question') == 5){
-            return $results->Question5Answer;
-        } else if ($request->input('question') == 6){
-            return $results->Question6Answer;
-        } else if ($request->input('question') == 7){
-            return $results->Question7Answer;
-        } else if ($request->input('question') == 8){
-            return $results->Question8Answer;
-        } else if ($request->input('question') == 9){
-            return $results->Question9Answer;
-        } else if ($request->input('question') == 10){
-            return $results->Question10Answer;
+        $questionNumber = $request->input('question');
+        
+        // Check if the question number is within the valid range (1 to 10)
+        if ($questionNumber >= 1 && $questionNumber <= 10) {
+            return $results->{"Question{$questionNumber}Answer"};
         }
-
-        return 'error';
+    
+        return '';
     }
+    
 
     public function isCompleted() {
         $user = Auth::user();
@@ -121,5 +85,14 @@ class QuizController extends Controller
         // send email to admin
         // Mail::to('example@email.com')
         //	->send(new QuizMail($results, $userDetails));
+    }
+
+    public function showResults(User $user) {
+
+        $user = $user->load('metas');
+
+        return Inertia::render('QuizResults', [
+            "user" => $user,
+        ]);
     }
 }

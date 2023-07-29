@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function show()
     {
-        $users = $this->getRows()->load('metas');;
+        $users = $this->getRows()->load('metas');
 
         return Inertia::render('Admin', [
             'users' => $users,
