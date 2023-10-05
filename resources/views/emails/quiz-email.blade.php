@@ -8,26 +8,13 @@
 
     <div class="border-2 border-black px-4 py-2 bg-teal-100">
       <ol class="list-decimal ml-4">
-        <li>
-          <h6 class=" text-lg">CHANGE TO QUESTION 1 QUESTION</h6>
-          <p class="ml-4 text-lg">-> {{ $results['Question1Answer'] }} </p>
-        </li>
-        <li>
-          <h6 class="mt-8 text-lg">CHANGE TO QUESTION 2 QUESTION</h6>
-          <p class="ml-4 text-lg">-> {{ $results['Question2Answer'] }} </p>
-        </li>
-        <li>
-          <h6 class="mt-8 text-lg">CHANGE TO QUESTION 3 QUESTION</h6>
-          <p class="ml-4 text-lg">-> {{ $results['Question3Answer'] }} </p>
-        </li>
-        <li>
-          <h6 class="mt-8 text-lg">CHANGE TO QUESTION 4 QUESTION</h6>
-          <p class="ml-4 text-lg">-> {{ $results['Question4Answer'] }} </p>
-        </li>
-        <li>
-          <h6 class="mt-8 text-lg">CHANGE TO QUESTION 5 QUESTION</h6>
-          <p class="ml-4 text-lg">-> {{ $results['Question5Answer'] }} </p>
-        </li>
+        @for ($i = 0; $i < count($questions); $i++)
+            <li>
+                <h6 class="text-lg">{{ $questions[$i] }}</h6>
+                <p class="ml-4 text-lg">-> {{ $answers[$i] }}</p>
+            </li>
+        @endfor
+
       </ol>
     </div>
   </div>

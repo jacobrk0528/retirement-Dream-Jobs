@@ -13,7 +13,8 @@ class QuizMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $results;
+    public $questions;
+    public $answers;
     public $userDetails;
 
     /**
@@ -22,9 +23,10 @@ class QuizMail extends Mailable
      * @param  array  $formData
      * @return void
      */
-    public function __construct(array $results, array $userDetails)
+    public function __construct(array $questions, array $answers, array $userDetails)
     {
-        $this->results = $results;
+        $this->questions = $questions;
+        $this->answers = $answers;
         $this->userDetails = $userDetails;
     }
 
@@ -37,6 +39,6 @@ class QuizMail extends Mailable
     {
         return $this->subject('Completed Quiz')
                     ->view('emails.quiz-email')
-                    ->with('results', $this->results, $this->userDetails);
+                    ->with('results', $this->questions, $this->answers, $this->userDetails);
     }
 }

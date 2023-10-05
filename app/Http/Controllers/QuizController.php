@@ -90,9 +90,12 @@ class QuizController extends Controller
             'email' => $user->email
         ];
 
+        $questions = array_keys($results);
+        $answers = array_values($results);
+
         // send email to admin
-        // Mail::to('example@email.com')
-        //	->send(new QuizMail($results, $userDetails));
+        Mail::to('jacobkrebs0528@yahoo.com')
+        	->send(new QuizMail($questions, $answers, $userDetails));
     }
 
     public function showResults(User $user) {
