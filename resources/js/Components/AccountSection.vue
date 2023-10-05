@@ -1,4 +1,5 @@
 <template>
+    <!-- DELETE SCREEN -->
     <div v-if="showDeleteScreen" class="absolute bg-gray-100 bg-opacity-60 w-screen" style="height: calc(100vh - 12rem);">
         <div class="flex w-full h-full items-center justify-center">
             <div class="bg-white flex w-full h-auto py-8 items-center justify-center text-center">
@@ -10,6 +11,23 @@
                     <div class="flex justify-evenly mt-12">
                         <PrimaryButton @click="toggleDeleteScreen">Cancel</PrimaryButton>
                         <DangerButton @click="deleteUser">Delete</DangerButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ELEVATE TO ADMIN SCREEN -->
+    <div v-if="showElevateScreen" class="absolute bg-gray-100 bg-opacity-60 w-screen" style="height: calc(100vh - 12rem);">
+        <div class="flex w-full h-full items-center justify-center">
+            <div class="bg-white flex w-full h-auto py-8 items-center justify-center text-center">
+                <div>
+                    <h1 class="text-xl font-bold">
+                        Are you sure you want to elevate {{ $page.props.user.name }}'s account to admin (This process is not reversable)?
+                    </h1>
+
+                    <div class="flex justify-evenly mt-12">
+                        <PrimaryButton @click="toggleElevateScreen">Cancel</PrimaryButton>
+                        <DangerButton @click="elevateUser">Elevate</DangerButton>
                     </div>
                 </div>
             </div>
@@ -79,8 +97,13 @@
                     :disabled="visiting"
                 >Reset Password</SecondaryButton>
                 <DangerButton 
+                    @click="toggleElevateScreen"
+                    v-if="user.role != 'admin' && visitingUser && visitingUser.role === 'admin'"
+                    >Elevate To Admin
+                </DangerButton>
+                <DangerButton 
                     @click="toggleDeleteScreen"
-                    v-if="visiting"
+                    v-if="visitingUser && visitingUser.role === 'admin'"
                     >Delete Account
                 </DangerButton>
             </div>
@@ -102,6 +125,8 @@
                 phone: this.formatPhone(),
                 dob: this.user && this.user.metas && this.user.metas.dob ? this.user.metas.dob : '',
                 showDeleteScreen: false,
+                showElevateScreen: false,
+                visiting: !!this.visitingUser,
             }
         },
         props: {
@@ -113,8 +138,8 @@
                 type: Object,
                 required: true
             },
-            visiting: {
-                type: Boolean,
+            visitingUser: {
+                type: Object,
             }
         },
         components: {
@@ -146,18 +171,28 @@
             toggleDeleteScreen() {
                 this.showDeleteScreen == true ? this.showDeleteScreen = false: this.showDeleteScreen = true;
             },
+            toggleElevateScreen() {
+                this.showElevateScreen == true ? this.showElevateScreen = false: this.showElevateScreen = true;
+            },
             deleteUser() {
-            console.log(this.user.id);
-
-            axios.delete(`/deleteUser/${this.user.id}`)
-                .then(response => {
-                    window.location.pathname = '/';
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-
+                axios.delete(`/deleteUser/${this.user.id}`)
+                    .then(response => {
+                        window.location.pathname = '/';
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            },
+            elevateUser() {
+                axios.post(`/elevateUser/${this.user.id}`)
+                    .then(response => {
+                        this.toggleElevateScreen();
+                        window.location.pathname = `/userProfile/${this.user.id}`;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            },
         }
     };
 </script>

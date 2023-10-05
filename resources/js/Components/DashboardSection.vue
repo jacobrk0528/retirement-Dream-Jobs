@@ -77,6 +77,7 @@ export default {
             completionDate: '',
             showResumeUpload: false,
             hasResume: false,
+            visiting: !!this.visitingUser,
         }
     },
     components: {
@@ -97,8 +98,8 @@ export default {
             type: String,
             required: true
         },
-        visiting: {
-            type: Boolean,
+        visitingUser: {
+            type: Object,
         }
     },
     async created() {

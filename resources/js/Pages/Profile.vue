@@ -2,18 +2,18 @@
     <AppLayout :Auth="!!$page.props.auth.user">
         <AccountSection
             :user="user"
-            :visiting="visitingProfile"/>
+            :visitingUser="visitingProfile"/>
         <DashboardSection
             :user="user"
             Label="Quiz"
             name="Placement"
-            :visiting="visitingProfile"
+            :visitingUser="visitingProfile"
         />
         <DashboardSection
             :user="user"
             Label="Resume"
             name="Resume"
-            :visiting="visitingProfile"
+            :visitingUser="visitingProfile"
         />
         <div v-if="successMessage" class="absolute right-0 bottom-24 sm:bottom-0 mr-4 mb-4">
             <SuccessMessage>
@@ -32,7 +32,7 @@ import SuccessMessage from '../Components/SuccessMessage.vue';
 
 defineProps({
     user: Object,
-    visitingProfile: Boolean,
+    visitingProfile: Object,
     successMessage: String,
 });
 </script>

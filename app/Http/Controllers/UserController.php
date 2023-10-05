@@ -28,15 +28,10 @@ class UserController extends Controller
             return redirect()->route('home');
         }
 
-        if ($id != Auth::id()) {
-            $visiting = true;
-        } else {
-            $visiting = false;
-        }
-
         return Inertia::render('Profile', [
             "user" => $user,
-            "visitingProfile" => $visiting,
+            "metas" => $user->metas ? $user->metas : null,
+            "visitingProfile" => Auth::user(),
         ]);
     }
 
@@ -62,6 +57,13 @@ class UserController extends Controller
         ]);
     }
 
+    // ELEVATE USER TO ADMIN
+    public function elevate(User $user) {
+        $user->role = "admin";
+        $user->save();
+    }
+
+    // DESTROY USER
     public function destroy(User $user)
     {
         if($user->role != 'admin') {
