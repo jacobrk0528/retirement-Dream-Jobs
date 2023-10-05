@@ -103,7 +103,7 @@
                 </DangerButton>
                 <DangerButton 
                     @click="toggleDeleteScreen"
-                    v-if="visitingUser && visitingUser.role === 'admin'"
+                    v-if="user.role != 'admin' && visitingUser && visitingUser.role === 'admin'"
                     >Delete Account
                 </DangerButton>
             </div>
